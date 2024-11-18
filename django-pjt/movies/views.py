@@ -11,7 +11,27 @@ from rest_framework import status
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
-# Create your views here.
+
+# # 구조 확인 용
+# from django.http import JsonResponse
+
+# def movie_list(request):
+#     # 예제 응답 데이터
+#     movies = [
+#         {'id': 1, 'title': 'Inception'},
+#         {'id': 2, 'title': 'Interstellar'},
+#     ]
+#     return JsonResponse(movies, safe=False)
+
+# def movie_detail(request, movie_pk):
+#     # 예제 단일 영화 응답 데이터
+#     movie = {'id': movie_pk, 'title': 'Inception'}
+#     return JsonResponse(movie)
+
+
+
+
+# 닉네임
 class CheckNicknameView(APIView):
     def get(self, request):
         nickname = request.query_params.get('nickname')
@@ -20,13 +40,16 @@ class CheckNicknameView(APIView):
         return Response({'message': '사용 가능한 닉네임입니다.'}, status=status.HTTP_200_OK)
 
 
+
+
 # 영화 목록
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def movie_list(request):
     # 영화 목록 조회
     if request.method == 'GET':
-        movies = get_list_or_404(Movie)
+        # movies = get_list_or_404(Movie)
+        movies = Movie.objects.all()
         serializer = MovieListSerializer(movies, many=True)
         return Response(serializer.data)
 

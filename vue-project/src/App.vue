@@ -1,7 +1,9 @@
 <template>
   <header>
     <nav>
-      <RouterLink :to="{ name: 'MovieView' }">Movies</RouterLink>
+      <RouterLink :to="{ name: 'MovieView' }">Movies</RouterLink> |
+      <RouterLink :to="{ name: 'SignUpView' }">SingUp</RouterLink> |
+      <RouterLink :to="{ name: 'LogInView' }">LogIn</RouterLink>
     </nav>
   </header>
   <RouterView />
