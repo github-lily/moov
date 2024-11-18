@@ -1,18 +1,21 @@
 from rest_framework import serializers
 from .models import Review, Movie
 
+# 영화 목록
 class MovieListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ('id', 'title', 'content')
+        fields = ('id', 'title', 'overview','poster_path')
 
 
+# 전체 영화
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = '__all__'
         read_only_fields = ('user',)
 
+# 리뷰&닉네임
 class ReviewSerializer(serializers.ModelSerializer):
     nickname = serializers.CharField(source='user.nickname', read_only=True)
 

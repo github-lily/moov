@@ -1,16 +1,12 @@
 <template>
-  <header>
-    <nav>
-      <RouterLink :to="{ name: 'MovieView' }">Movies</RouterLink> |
-      <RouterLink :to="{ name: 'SignUpView' }">SingUp</RouterLink> |
-      <RouterLink :to="{ name: 'LogInView' }">LogIn</RouterLink>
-    </nav>
-  </header>
+  <HeaderNav />
   <RouterView />
 </template>
 
 <script setup>
 import { RouterView, RouterLink } from 'vue-router'
+import HeaderNav from './components/common/HeaderNav.vue';
+
 </script>
 
 <style scoped>

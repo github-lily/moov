@@ -11,7 +11,7 @@
         <input type="password" id="password" v-model.trim="password">
       </div><br>
 
-      <input type="submit" value="LogIn">
+      <input type="submit" value="LogIn" >
     </form>
   </div>
 </template>
@@ -21,6 +21,9 @@ import { ref } from 'vue';
 
 const username = ref(null)
 const password = ref(null)
+
+
+
 
 </script>
 
