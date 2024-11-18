@@ -1,13 +1,15 @@
 <template>
   <div>
-    <h1>Movie Page</h1>
-    <RouterLink :to="{ name: 'CreateView' }">Create</RouterLink>
-    <MovieList />
+    <h1>Main Movie Page</h1>
+    <RouterLink :to="{name:'tmdbPopular'}">인기 순위</RouterLink> |
+    <RouterLink :to="{name:'tmdbTopRated'}">역대 순위</RouterLink>
+    <hr>
+    <!-- <RouterLink :to="{ name: 'CreateView' }">Create</RouterLink> -->
+    <RouterView />
   </div>
 </template>
 
 <script setup>
-import MovieList from '@/components/MovieList.vue'
 import { onMounted } from 'vue'
 import { useCounterStore } from '@/stores/counter'
 import { RouterLink } from 'vue-router'

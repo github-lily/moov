@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import MovieListItem from '@/components/MovieListItem.vue'
+import MovieListItem from '@/components/movie/MovieListItem.vue'
 import { useCounterStore } from '@/stores/counter'
 
 const store = useCounterStore()
