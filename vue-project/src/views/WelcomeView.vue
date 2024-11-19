@@ -32,7 +32,7 @@ const goToLogIn = () => {
 <style scoped>
 
 .backtext {
-  color: rgb(100, 100, 100);
+  color: rgb(54, 54, 54);
   position: absolute;
   left: 30px;
   top: 100px;
@@ -72,6 +72,10 @@ h1 {
   padding: 5px 0;
 }
 
+.btn:hover {
+  background-color: rgb(238, 238, 19);
+}
+
 .tr {
   font-size: 10px;
   vertical-align: middle;
@@ -80,7 +84,7 @@ h1 {
 p {
   font-size: 12px;
   margin-bottom: 2px;
-  color: gray;
+  color: rgb(200 , 200, 200);
   font-family: 'Noto Sans KR';
 
 }
