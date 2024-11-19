@@ -17,13 +17,13 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useCounterStore } from '@/stores/counter'
+import { useMovieStore } from '@/stores/movie'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 
 const title = ref(null)
 const content = ref(null)
-const store = useCounterStore()
+const store = useMovieStore()
 const router = useRouter()
 
 // DRF로 게시글 생성 요청을 보내는 함수

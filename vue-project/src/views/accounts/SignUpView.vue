@@ -2,7 +2,7 @@
   <div class="container">
     <h1 class="title">MOOV.</h1>
 
-    <form>
+    <form @submit.prevent="signUp">
       <div>
         <label class="label" for="username">사용자 이름 </label> 
         <input class="input" type="text" id="username" v-model.trim="username">
@@ -23,12 +23,24 @@
 </template>
 
 <script setup>
+
+import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
+
+const store = useAuthStore()
 
 const username = ref(null)
 const password1 = ref(null)
 const password2 = ref(null)
 
+const signUp = function() {
+  const payload = {
+    username : username.value,
+    password1 : password1.value,
+    password2 : password2.value,
+  }
+  store.signUp(payload)
+}
 </script>
 
 <style>
