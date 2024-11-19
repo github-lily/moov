@@ -7,13 +7,20 @@ import SignUpView from '@/views/accounts/SignUpView.vue'
 import LogInView from '@/views/accounts/LogInView.vue'
 import TmdbTopRated from '@/components/tmbd/TmdbTopRated.vue'
 import TmdbPopular from '@/components/tmbd/TmdbPopular.vue'
+import WelcomeView from '@/views/WelcomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // 메인페이지
+    // 첫 화면
     {
       path: '/',
+      name: 'WelcomeView',
+      component: WelcomeView
+    },
+    // 메인페이지
+    {
+      path: '/movies',
       name: 'MovieView',
       component: MovieView,
       children : [
