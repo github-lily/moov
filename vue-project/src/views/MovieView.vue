@@ -11,10 +11,10 @@
 
 <script setup>
 import { onMounted } from 'vue'
-import { useCounterStore } from '@/stores/counter'
+import { useMovieStore } from '@/stores/movie'
 import { RouterLink } from 'vue-router'
 
-const store = useCounterStore()
+const store = useMovieStore()
 
 onMounted(() => {
   // mount 되기전에 store에 있는 전체 게시글 요청 함수를 호출
