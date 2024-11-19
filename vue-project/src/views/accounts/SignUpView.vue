@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <h1 class="title">MOOV.</h1>
 
     <form @submit.prevent="signUp">
       <div>
