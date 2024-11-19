@@ -1,11 +1,5 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python,django,venv
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,django,venv
-# Python 캐시 파일
-*.pyc
-__pycache__/
-
-# 가상 환경 폴더
-venv/
 
 ### Django ###
 *.log
