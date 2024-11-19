@@ -14,7 +14,7 @@ const router = createRouter({
   routes: [
     // 첫 화면
     {
-      path: '/welcome',
+      path: '/',
       name: 'WelcomeView',
       component: WelcomeView
     },
