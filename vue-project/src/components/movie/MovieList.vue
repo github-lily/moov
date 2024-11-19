@@ -11,7 +11,7 @@
 
 <script setup>
 import MovieListItem from '@/components/movie/MovieListItem.vue'
-import { useCounterStore } from '@/stores/counter'
+import { useMovieStore } from '@/stores/movie'
 
-const store = useCounterStore()
+const store = useMovieStore
 </script>

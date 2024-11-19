@@ -14,10 +14,10 @@
 <script setup>
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
-import { useCounterStore } from '@/stores/counter'
+import { useMovieStore } from '@/stores/movie'
 import { useRoute } from 'vue-router'
 
-const store = useCounterStore()
+const store = useMovieStore()
 const route = useRoute()
 const movie = ref(null)
 
