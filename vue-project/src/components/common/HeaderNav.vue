@@ -18,13 +18,14 @@
     </header>
   </template>
   
-  <script setup>
-  import { RouterView, RouterLink } from 'vue-router'
-  import { useCounterStore } from '@/stores/counter';
 
-  const store = useCounterStore()
-  </script>
-  
-  <style scoped>
-  </style>
-  
+<script setup>
+import { RouterView, RouterLink } from 'vue-router'
+import { useAuthStore } from '@/stores/auth';
+
+const store = useAuthStore()
+
+</script>
+
+<style scoped>
+</style>
