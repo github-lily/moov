@@ -17,10 +17,13 @@
 </template>
 
 <script setup>
+import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
 
+const store = useAuthStore()
 const username = ref(null)
 const password = ref(null)
+
 
 
 
