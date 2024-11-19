@@ -8,9 +8,9 @@
     <div class="container" >
       <h1>MOOV.</h1>
         <p>계정이 이미 있으신가요?</p>
-        <button class="btn btn-primary" type="submit" @click="goToSignUp">Log In <small class="tr">&#9654</small></button>  
+        <button class="btn btn-primary" type="submit" @click="goToLogIn">Log In <small class="tr">&#9654</small></button>  
         <p>계정이 없으신가요?</p>
-        <button class="btn btn-primary" type="submit" @click="goToSignIn">Sign Up <small class="tr">&#9654</small></button>
+        <button class="btn btn-primary" type="submit" @click="goToSignUp">Sign Up <small class="tr">&#9654</small></button>
     </div>
   </div>
 </template>
@@ -24,7 +24,7 @@ const goToSignUp = () => {
   router.push({name:'SignUpView'})
 }
 
-const goToSignIn = () => {
+const goToLogIn = () => {
   router.push({name:'LogInView'})
 }
 </script>
@@ -36,7 +36,8 @@ const goToSignIn = () => {
   position: absolute;
   left: 30px;
   top: 100px;
-  font-size: 50px;
+  font-size: 5vw;
+  font-family: 'Krona One';
 }
 
 .container {
@@ -57,6 +58,7 @@ h1 {
   text-align: center;
   margin-bottom: 50px;
   color: white;
+  font-family: 'Krona One';
 }
 .btn {
   border-radius: 50px;
@@ -66,6 +68,7 @@ h1 {
   background-color: rgb(255, 255, 115);
   border: none;
   color: black;
+  font-family: 'Krona One';
   padding: 5px 0;
 }
 
@@ -78,5 +81,7 @@ p {
   font-size: 12px;
   margin-bottom: 2px;
   color: gray;
+  font-family: 'Noto Sans KR';
+
 }
 </style>
