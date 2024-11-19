@@ -18,7 +18,10 @@ const store = useMovieStore()
 
 onMounted(() => {
   // mount 되기전에 store에 있는 전체 게시글 요청 함수를 호출
+  console.log('before getmovies')
+  
   store.getMovies()
+  console.log('end of getmovies')
 })
 </script>
 
