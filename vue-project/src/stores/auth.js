@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 
 export const useAuthStore = defineStore('auth', () => {
   const API_URL = 'http://127.0.0.1:8000'
-  const token = ref('eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNTkzZTYxYWQxMDIyNDZhOTM1MzdiZjgwZjQ1OTYwMSIsIm5iZiI6MTczMTk3NzQ1NS44OTU0MDYsInN1YiI6IjY3MzZlNDVlMjk1NGQyNjQ3NjI1YTc0YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mKWeZNUGw2sPFImPftyZMH1hqp__bu1zYpVJxpw4bdQ')               // 토큰을 받아서 저장할 변수
+  const token = ref(null)               // 토큰을 받아서 저장할 변수
 
   const router = useRouter()
 
@@ -25,7 +25,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     axios ({
       method:'post',
-      url:`${API_URL}/movies/signup/`,
+      url:`${API_URL}/accounts/signup/`,
       data: {
         username, password1, password2
       }
@@ -33,6 +33,11 @@ export const useAuthStore = defineStore('auth', () => {
       .then((res) => {
         console.log(res)
         console.log('회원가입 성공')
+        // 로그인까지 한번에
+        const password = password1
+        logIn({username, password})
+        // 나중에 TestView로 보내기! 수정해야함~!
+        router.replace({name:'MovieView'})
       })
       .catch((err) => {
         console.log(err)
@@ -55,7 +60,6 @@ export const useAuthStore = defineStore('auth', () => {
         token.value = res.data.key
         router.push({name : 'MovieView'})
         console.log('로그인 성공')
-        console.log(res)
       })
       .catch((err) => {
         console.log(err)

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>LogIn Page</h1>
-    <form>
+    <form @submit.prevent="logIn">
       <div>
         <label for="username">username : </label>
         <input type="text" id="username" v-model.trim="username">
@@ -24,6 +24,13 @@ const store = useAuthStore()
 const username = ref(null)
 const password = ref(null)
 
+const logIn = function() {
+  const payload = {
+    username : username.value,
+    password : password.value
+  }
+  store.logIn(payload)
+}
 
 
 
