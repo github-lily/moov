@@ -52,7 +52,7 @@
           <div class="test"></div>
         </div>
       </div>
-      <div>
+      <div class="movielist">
         <MovieList
           v-for="movie in store.movies"
           :key="movie.id"
@@ -60,6 +60,7 @@
         /> 
       </div>
     <RouterView />
+    
   </div>
 
 </template>
