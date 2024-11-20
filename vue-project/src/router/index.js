@@ -2,11 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import MovieView from '@/views/MovieView.vue'
 import DetailView from '@/views/DetailView.vue'
-import CreateView from '@/views/CreateView.vue'
 import SignUpView from '@/views/accounts/SignUpView.vue'
 import LogInView from '@/views/accounts/LogInView.vue'
-import TmdbTopRated from '@/components/tmbd/TmdbTopRated.vue'
-import TmdbPopular from '@/components/tmbd/TmdbPopular.vue'
 import WelcomeView from '@/views/WelcomeView.vue'
 import TestPreView from '@/views/TestPreView.vue'
 import TestView from '@/views/TestView.vue'
@@ -25,44 +22,32 @@ const router = createRouter({
       path: '/movies',
       name: 'MovieView',
       component: MovieView,
-      children : [
-        {
-          path : "popular",
-          name : "tmdbPopular",
-          component : TmdbPopular
-        },
-        {
-          path : "toprated",
-          name : "tmdbTopRated",
-          component : TmdbTopRated
-        },
-      ]
     },
+    // 상세페이지
     {
       path: '/movies/:id',
       name: 'DetailView',
       component: DetailView
     },
-    {
-      path: '/create',
-      name: 'CreateView',
-      component: CreateView
-    },
+    // 회원가입
     {
       path: '/signup',
       name: 'SignUpView',
       component: SignUpView
     },
+    // 로그인
     {
       path: '/login',
       name: 'LogInView',
       component: LogInView
     },
+    // 테스트 시작 예고 페이지
     {
       path: '/testpreview',
       name: 'TestPreView',
       component: TestPreView
     },
+    // 테스트 페이지
     {
       path: '/test',
       name: 'TestView',

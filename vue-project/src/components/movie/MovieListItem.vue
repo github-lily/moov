@@ -1,12 +1,8 @@
 <template>
   <div>
-    <h5>{{ movie.id }}</h5>
-    <p>{{ movie.title }}</p>
-    <p>{{ movie.content }}</p>
     <RouterLink 
-      :to="{ name: 'DetailView', params: { id: movie.id } }"  
-    >
-      Detail
+      :to="{ name: 'DetailView', params: { id: movie.id } }">
+      [상세보기]
     </RouterLink>
     <hr>
   </div>
@@ -19,3 +15,7 @@ defineProps({
   movie: Object
 })
 </script>
+
+<style>
+
+</style>
