@@ -17,9 +17,9 @@
     <div class="movielist">
       <div>
         <label for="genre-select">Select Genre: </label>
-        <select id="genre-select">
+        <select id="genre-select" v-model="selectedGenre">
           <option value="">All Genre</option>
-          <option v-for="genre in genres" value="">{{ genre }}</option>
+          <option v-for="genre in genres" :value="genre">{{ genre }}</option>
         </select>
       </div>
       <!-- 영화 12개만 출력 -->
