@@ -144,16 +144,13 @@ body {
   color: rgb(148, 148, 148);
 }
 
-<<<<<<< HEAD
 h3 {
   font-size: 2em;
   font-family: 'Krona One';
   color: white;
   margin-bottom: 20px;
 }
-=======
 
 
 
->>>>>>> hyun
 </style>
