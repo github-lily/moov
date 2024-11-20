@@ -8,6 +8,8 @@ import LogInView from '@/views/accounts/LogInView.vue'
 import TmdbTopRated from '@/components/tmbd/TmdbTopRated.vue'
 import TmdbPopular from '@/components/tmbd/TmdbPopular.vue'
 import WelcomeView from '@/views/WelcomeView.vue'
+import TestPreView from '@/views/TestPreView.vue'
+import TestView from '@/views/TestView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -55,7 +57,17 @@ const router = createRouter({
       path: '/login',
       name: 'LogInView',
       component: LogInView
-    }
+    },
+    {
+      path: '/testpreview',
+      name: 'TestPreView',
+      component: TestPreView
+    },
+    {
+      path: '/test',
+      name: 'TestView',
+      component: TestView
+    },
   ]
 })
 
