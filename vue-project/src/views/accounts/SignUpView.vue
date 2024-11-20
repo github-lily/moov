@@ -13,12 +13,13 @@
       <p>비밀번호 확인 </p> 
       <input  class="input thirdinput" type="password" id="password2" v-model.trim="password2" placeholder="   비밀번호를 입력하세요.">
 
-      <input class="btn"  type="submit" value="SignUp" @click="goToTestPreView">
+      <input class="btn"  type="submit" value="SignUp">
     </form>
     <a href="#" @click="goToLogIn">이미 회원이신가요?</a>
   </div>
 </template>
 
+<!-- @click="goToTestPreView" -->
 <script setup>
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
@@ -45,9 +46,9 @@ const goToLogIn = () => {
   router.push({name:'LogInView'})
 }
 
-const goToTestPreView = () => {
-  router.push({name:'TestPreView'})
-}
+// const goToTestPreView = () => {
+//   router.push({name:'TestPreView'})
+// }
 </script>
 
 <style scoped>
