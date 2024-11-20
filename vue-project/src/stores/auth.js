@@ -37,7 +37,7 @@ export const useAuthStore = defineStore('auth', () => {
         const password = password1
         logIn({username, password})
         // 나중에 TestView로 보내기! 수정해야함~!
-        router.replace({name:'MovieView'})
+        router.replace({name:'TestPreView'})
       })
       .catch((err) => {
         console.log(err)
