@@ -1,0 +1,845 @@
+[
+{
+"model": "movies.Genre",
+"pk": 28,
+"fields": {
+"name": "액션"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 12,
+"fields": {
+"name": "모험"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 16,
+"fields": {
+"name": "애니메이션"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 35,
+"fields": {
+"name": "코미디"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 80,
+"fields": {
+"name": "범죄"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 99,
+"fields": {
+"name": "다큐멘터리"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 18,
+"fields": {
+"name": "드라마"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 10751,
+"fields": {
+"name": "가족"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 14,
+"fields": {
+"name": "판타지"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 36,
+"fields": {
+"name": "역사"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 27,
+"fields": {
+"name": "공포"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 10402,
+"fields": {
+"name": "음악"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 9648,
+"fields": {
+"name": "미스터리"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 10749,
+"fields": {
+"name": "로맨스"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 878,
+"fields": {
+"name": "SF"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 10770,
+"fields": {
+"name": "TV 영화"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 53,
+"fields": {
+"name": "스릴러"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 10752,
+"fields": {
+"name": "전쟁"
+}
+},
+{
+"model": "movies.Genre",
+"pk": 37,
+"fields": {
+"name": "서부"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 2524,
+"fields": {
+"name": "톰 하디"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 5294,
+"fields": {
+"name": "추이텔 에지오포"
+}
+},
+{
+"model": "movies.Director",
+"pk": 940376,
+"fields": {
+"name": "Kelly Marcel"
+}
+},
+{
+"model": "movies.Movie",
+"pk": 912649,
+"fields": {
+"actors": [
+2524,
+5294
+],
+"adult": false,
+"director": 940376,
+"genres": [
+878,
+28,
+12
+],
+"overview": "환상의 케미스트리의 에디 브록과 그의 심비오트 베놈은 그들을 노리는 정체불명 존재의 추격을 피해 같이 도망을 다니게 된다. 한편 베놈의 창조자 널은 고향 행성에서부터 그들을 찾아내기 위해 지구를 침략하고 에디와 베놈은 그동안 겪어보지 못한 최악의 위기를 맞이하게 되는데…",
+"popularity": 3777.259,
+"poster_path": "/3flIDcZF3tnR7m5OU2h7lLPQwmr.jpg",
+"release_date": "2024-10-22",
+"runtime": 109,
+"trailer_key": "soCtsN0JYUg",
+"title": "베놈: 라스트 댄스",
+"vote_average": 6.461,
+"vote_count": 744,
+"movie_like_users": []
+}
+},
+{
+"model": "movies.Actor",
+"pk": 1882502,
+"fields": {
+"name": "로렌 라베라"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 1880016,
+"fields": {
+"name": "데이비드 하워드 손턴"
+}
+},
+{
+"model": "movies.Director",
+"pk": 933176,
+"fields": {
+"name": "Damien Leone"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 1267329,
+"fields": {
+"name": "루피타 뇽오"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 1253360,
+"fields": {
+"name": "페드로 파스칼"
+}
+},
+{
+"model": "movies.Director",
+"pk": 66193,
+"fields": {
+"name": "크리스 샌더스"
+}
+},
+{
+"model": "movies.Movie",
+"pk": 1184918,
+"fields": {
+"actors": [
+1267329,
+1253360
+],
+"adult": false,
+"director": 66193,
+"genres": [
+16,
+878,
+10751
+],
+"overview": "우연한 사고로 거대한 야생에 불시착한 로봇 로즈는 주변 동물들의 행동을 배우며 낯선 환경 속에 적응해 가던 중, 사고로 세상에 홀로 남겨진 아기 기러기 브라이트빌의 보호자가 된다. 로즈는 입력되어 있지 않은 새로운 역할과 관계에 낯선 감정을 마주하고 겨울이 오기 전에 남쪽으로 떠나야 하는 브라이트빌을 위해 동물들의 도움을 받아 이주를 위한 생존 기술을 가르쳐준다. 그러나 선천적으로 몸집이 작은 브라이트빌은 짧은 비행도 힘겨워 하는데...",
+"popularity": 2442.11,
+"poster_path": "/8dkuf9IuVh0VZjDTk7kAY67lU0U.jpg",
+"release_date": "2024-09-12",
+"runtime": 102,
+"trailer_key": "GJ7mqjuWQxA",
+"title": "와일드 로봇",
+"vote_average": 8.5,
+"vote_count": 2887,
+"movie_like_users": []
+}
+},
+{
+"model": "movies.Actor",
+"pk": 2422766,
+"fields": {
+"name": "Francisco Ortiz"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 72128,
+"fields": {
+"name": "José María Yázpik"
+}
+},
+{
+"model": "movies.Director",
+"pk": 1017209,
+"fields": {
+"name": "Carles Torrens"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 10859,
+"fields": {
+"name": "라이언 레이놀즈"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 6968,
+"fields": {
+"name": "휴 잭맨"
+}
+},
+{
+"model": "movies.Director",
+"pk": 17825,
+"fields": {
+"name": "숀 레비"
+}
+},
+{
+"model": "movies.Movie",
+"pk": 533535,
+"fields": {
+"actors": [
+10859,
+6968
+],
+"adult": false,
+"director": 17825,
+"genres": [
+28,
+35,
+878
+],
+"overview": "히어로 생활에서 은퇴한 후, 평범한 중고차 딜러로 살아가던 ‘데드풀’이 예상치 못한 거대한 위기를 맞아 모든 면에서 상극인 ‘울버린’을 찾아가게 되며 펼쳐지는 도파민 폭발 액션 블록버스터.",
+"popularity": 1918.569,
+"poster_path": "/4Zb4Z2HjX1t5zr1qYOTdVoisJKp.jpg",
+"release_date": "2024-07-24",
+"runtime": 128,
+"trailer_key": "NVDLUJa5dac",
+"title": "데드풀과 울버린",
+"vote_average": 7.694,
+"vote_count": 5451,
+"movie_like_users": []
+}
+},
+{
+"model": "movies.Actor",
+"pk": 2326151,
+"fields": {
+"name": "폴 메스칼"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 5292,
+"fields": {
+"name": "덴젤 워싱턴"
+}
+},
+{
+"model": "movies.Director",
+"pk": 1993861,
+"fields": {
+"name": "Jaafar Ameur"
+}
+},
+{
+"model": "movies.Movie",
+"pk": 558449,
+"fields": {
+"actors": [
+2326151,
+5292
+],
+"adult": false,
+"director": 1993861,
+"genres": [
+28,
+12,
+18
+],
+"overview": "로마의 영웅이자 최고의 검투사였던 ‘막시무스’가 콜로세움에서 죽음을 맞이한 뒤 20여 년이 흐른 후. 쌍둥이 황제 ‘게타’와 ‘카라칼라’의 폭압 아래 시민을 위한 자유로운 나라 ‘로마의 꿈’은 잊힌 지 오래다. 한편 ‘아카시우스’ 장군이 이끄는 로마군에 대패한 후 모든 것을 잃고 노예로 전락한 ‘루시우스’는 강한 권력욕을 지닌 ‘마크리누스’의 눈에 띄어 검투사로 발탁된다. 로마를 향한 걷잡을 수 없는 분노, 타고난 투사의 기질로 콜로세움에 입성하게 된 ‘루시우스’는 결투를 거듭하며 자신이 진짜 누구인지 알게 되고 마침내 로마의 운명을 건 결전을 준비하게 되는데...!",
+"popularity": 2292.147,
+"poster_path": "/b5UXjzW5cLZhprMnlAmsVAA3G4t.jpg",
+"release_date": "2024-11-13",
+"runtime": 148,
+"trailer_key": "eCO6NOFLXYY",
+"title": "글래디에이터 II",
+"vote_average": 6.8,
+"vote_count": 359,
+"movie_like_users": []
+}
+},
+{
+"model": "movies.Actor",
+"pk": 3416,
+"fields": {
+"name": "데미 무어"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 1392137,
+"fields": {
+"name": "마가렛 퀄리"
+}
+},
+{
+"model": "movies.Director",
+"pk": 3509434,
+"fields": {
+"name": "Anne Juin"
+}
+},
+{
+"model": "movies.Movie",
+"pk": 933260,
+"fields": {
+"actors": [
+3416,
+1392137
+],
+"adult": false,
+"director": 3509434,
+"genres": [
+18,
+27,
+878
+],
+"overview": "더 나은 버전의 당신을 꿈꿔본 적 있나요? 당신의 인생을 바꿔줄 신제품 ‘서브스턴스’. ‘서브스턴스’는 또 다른 당신을 만들어냅니다. 새롭고, 젊고, 더 아름답고, 더 완벽한 당신을. 단 한가지 규칙, 당신의 시간을 공유하면 됩니다. 당신을 위한 일주일, 새로운 당신을 위한 일주일, 각각 7일간의 완벽한 밸런스. 쉽죠? 균형을 존중한다면… 무엇이 잘못될 수 있을까요?",
+"popularity": 1693.522,
+"poster_path": "/pq5Wh3DE0KIBjF2kdGHn98eV1PC.jpg",
+"release_date": "2024-09-07",
+"runtime": 140,
+"trailer_key": "h_P3sWRq5HM",
+"title": "서브스턴스",
+"vote_average": 7.3,
+"vote_count": 2021,
+"movie_like_users": []
+}
+},
+{
+"model": "movies.Actor",
+"pk": 74568,
+"fields": {
+"name": "크리스 헴스워스"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 226366,
+"fields": {
+"name": "브라이언 타이리 헨리"
+}
+},
+{
+"model": "movies.Director",
+"pk": 84496,
+"fields": {
+"name": "조시 쿨리"
+}
+},
+{
+"model": "movies.Movie",
+"pk": 698687,
+"fields": {
+"actors": [
+74568,
+226366
+],
+"adult": false,
+"director": 84496,
+"genres": [
+16,
+878,
+12,
+10751
+],
+"overview": "사이버트론 행성의 지하 광산에서 일하는 변신 못 하는 하급 로봇 오라이온 팩스와 D-16. 한 번도 가보지 못한 지상 세계를 꿈꾸던 둘은 쾌활한 수다쟁이 B-127, 카리스마 넘치는 엘리타 원과 함께 출입이 금지된 지상에 도달한다. 지상에서 잠들어 있던 알파 트라이온을 만난 넷은 그의 도움으로 잠재되어 있던 변신 능력을 얻게 된다. 막강한 힘과 변신 능력으로 자유를 느낀 것도 잠시, 자신들의 행성을 지배하고 있는 거대한 배후의 존재를 알게 되며 모든 것을 바꿀 전쟁을 시작하는데…",
+"popularity": 1504.032,
+"poster_path": "/c2JXlWzvXegSda8qaATr8I47kMx.jpg",
+"release_date": "2024-09-11",
+"runtime": 104,
+"trailer_key": "M9PS8ssRuGg",
+"title": "트랜스포머 ONE",
+"vote_average": 8.088,
+"vote_count": 716,
+"movie_like_users": []
+}
+},
+{
+"model": "movies.Actor",
+"pk": 18918,
+"fields": {
+"name": "드웨인 존슨"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 16828,
+"fields": {
+"name": "크리스 에반스"
+}
+},
+{
+"model": "movies.Director",
+"pk": 2783515,
+"fields": {
+"name": "Riley Flanagan"
+}
+},
+{
+"model": "movies.Movie",
+"pk": 845781,
+"fields": {
+"actors": [
+18918,
+16828
+],
+"adult": false,
+"director": 2783515,
+"genres": [
+28,
+35,
+14
+],
+"overview": "크리스마스 D-1, 철통같은 보안을 뚫고 코드명 '레드 원' 산타클로스가 납치되고 크리스마스가 사라질 위기에 처했다! '레드 원'을 찾기 위해 사령관 '칼럼 드리프트'는 산타클로스 따위는 없다고 믿는 현상금 사냥꾼 '잭 오말리'와 협력하기로 한다. 시작부터 삐그덕 거리는 이들 앞에 크리스마스의 존재를 위협하는 위험천만한 적들이 나타나는데…",
+"popularity": 1379.194,
+"poster_path": "/ryYEpxWiZFmJJZUyvQCBvM5UOCU.jpg",
+"release_date": "2024-10-31",
+"runtime": 124,
+"trailer_key": "dnmA7lKiFsY",
+"title": "레드 원",
+"vote_average": 6.7,
+"vote_count": 121,
+"movie_like_users": []
+}
+},
+{
+"model": "movies.Actor",
+"pk": 1683343,
+"fields": {
+"name": "케일리 스패니"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 2761308,
+"fields": {
+"name": "데이비드 존슨"
+}
+},
+{
+"model": "movies.Director",
+"pk": 932248,
+"fields": {
+"name": "페데 알바레즈"
+}
+},
+{
+"model": "movies.Movie",
+"pk": 945961,
+"fields": {
+"actors": [
+1683343,
+2761308
+],
+"adult": false,
+"director": 932248,
+"genres": [
+878,
+27
+],
+"overview": "2142년, 부모 세대가 맞닥뜨렸던 암울한 미래를 피하려는 청년들이 더 나은 삶을 찾기 위해 식민지를 떠날 계획을 세운다. 하지만 버려진 우주 기지 로물루스에 도착한 이들은 악몽과도 같은 에이리언의 무자비한 공격에 쫓기기 시작한다. 그 누구도 그들의 절규를 들을 수 없는 우주 한가운데, 생존을 위한 치열한 사투를 벌여야 하는데...",
+"popularity": 1333.797,
+"poster_path": "/AmWTYg3RCMv7fbQxwCqrxiaUhkc.jpg",
+"release_date": "2024-08-13",
+"runtime": 119,
+"trailer_key": "WN8XA1u6x84",
+"title": "에이리언: 로물루스",
+"vote_average": 7.252,
+"vote_count": 2313,
+"movie_like_users": []
+}
+},
+{
+"model": "movies.Actor",
+"pk": 4495,
+"fields": {
+"name": "스티브 카렐"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 41091,
+"fields": {
+"name": "크리스틴 위그"
+}
+},
+{
+"model": "movies.Director",
+"pk": 1498226,
+"fields": {
+"name": "Patrick Delage"
+}
+},
+{
+"model": "movies.Movie",
+"pk": 519182,
+"fields": {
+"actors": [
+4495,
+41091
+],
+"adult": false,
+"director": 1498226,
+"genres": [
+16,
+10751,
+35,
+28
+],
+"overview": "슈트-업 하고 악당 전담 처리반 AVL이 된 에이전트 미니언즈와 미니언즈 만큼 귀여운 그루 주니어가 태어나면서 더욱 완벽해진 그루 패밀리. 이들 앞에 과거 그루의 고등학교 동창이자 그에게 체포당했던 빌런 맥심이 등장하고, 오직 그루를 향한 복수심에 불타올라 탈옥까지 감행한 맥심은 그루 패밀리의 뒤를 바짝 추격하며 위협을 가하기 시작하는데... 과연 에이전트 미니언즈와 그루 패밀리는 맥심을 막아낼 수 있을까?",
+"popularity": 1064.413,
+"poster_path": "/5hl1PEpAvZ8Ok37kB7woIssHi3X.jpg",
+"release_date": "2024-06-20",
+"runtime": 94,
+"trailer_key": "uOypbs4yYkM",
+"title": "슈퍼배드 4",
+"vote_average": 7.092,
+"vote_count": 2169,
+"movie_like_users": []
+}
+},
+{
+"model": "movies.Actor",
+"pk": 2963,
+"fields": {
+"name": "니콜라스 케이지"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 1274508,
+"fields": {
+"name": "제이든 리버허"
+}
+},
+{
+"model": "movies.Director",
+"pk": 3879718,
+"fields": {
+"name": "Benjamin Brewer"
+}
+},
+{
+"model": "movies.Movie",
+"pk": 1051896,
+"fields": {
+"actors": [
+2963,
+1274508
+],
+"adult": false,
+"director": 3879718,
+"genres": [
+28,
+27,
+53,
+878
+],
+"overview": "문명의 대부분이 파괴된 지구, 쌍둥이 형제들이 정체를 알 수 없는 괴물들로부터 아버지 ‘폴’과 이웃들을 지키기 위해 나서며 벌어지는 액션 스릴러",
+"popularity": 1005.439,
+"poster_path": "/spWV1eRzlDxvai8LbxwAWR0Vst4.jpg",
+"release_date": "2024-04-12",
+"runtime": 92,
+"trailer_key": "xtI93vJVPHA",
+"title": "아카디안",
+"vote_average": 6.1,
+"vote_count": 438,
+"movie_like_users": []
+}
+},
+{
+"model": "movies.Actor",
+"pk": 8891,
+"fields": {
+"name": "존 트래볼타"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 38025,
+"fields": {
+"name": "크리스틴 데이비스"
+}
+},
+{
+"model": "movies.Director",
+"pk": 17211,
+"fields": {
+"name": "랜들 에멧"
+}
+},
+{
+"model": "movies.Movie",
+"pk": 1116490,
+"fields": {
+"actors": [
+8891,
+38025
+],
+"adult": false,
+"director": 17211,
+"genres": [
+28,
+53
+],
+"overview": "전설적인 강도단의 보스 ‘메이슨’(존 트라볼타) 실패로 끝난 작전 이후 은퇴하고 잠적했던 그가 옛 팀원들의 다급한 요청으로 은행 강도 현장에 도착한다.  하지만 현장은 곧 치밀한 작전 따윈 사라지고 예상치 못한 FBI 협상가까지 등장하며 엉망이 되어버린다.  ‘메이슨’은 이제 FBI에 맞서 팀원들을 지키고 인생 마지막 한탕을 성공시키기 위해 완벽한 플랜 B를 설계하기 시작하는데…",
+"popularity": 936.396,
+"poster_path": "/4r77ZO9pKgQuW1GxjMrktyY8eUP.jpg",
+"release_date": "2024-04-26",
+"runtime": 90,
+"trailer_key": "pBushRNXUDA",
+"title": "캐시 아웃",
+"vote_average": 6.275,
+"vote_count": 109,
+"movie_like_users": []
+}
+},
+{
+"model": "movies.Actor",
+"pk": 2524,
+"fields": {
+"name": "톰 하디"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 1812,
+"fields": {
+"name": "미셸 윌리엄스"
+}
+},
+{
+"model": "movies.Director",
+"pk": 2784705,
+"fields": {
+"name": "Michael Saunders"
+}
+},
+{
+"model": "movies.Movie",
+"pk": 335983,
+"fields": {
+"actors": [
+2524,
+1812
+],
+"adult": false,
+"director": 2784705,
+"genres": [
+878,
+28
+],
+"overview": "진실을 위해서라면 몸을 사리지 않고 사회의 부조리를 취재하는 정의로운 열혈 기자 에디 브록. 거대 기업 라이프 파운데이션의 생체실험에 의혹을 품고 뒤를 쫓던 그는 이들의 사무실에 잠입했다가 실험실에서 외계 생물체 심비오트의 기습 공격을 받게 된다. 심비오트가 숙주의 몸과 정신을 지배할 때 능력을 발휘하는 베놈은 에디의 몸에 기생하며 갖가지 소동을 일으킨다. 한편 비밀리에 인간과 심비오트를 결합해 새로운 생명체를 만들려는 시도를 계속하던 라이프 파운데이션의 회장 드레이크 또한 심비오트의 숙주가 된다.",
+"popularity": 908.583,
+"poster_path": "/x4ojC59pYfPlAP4mmy2LSkCCuK2.jpg",
+"release_date": "2018-09-28",
+"runtime": 112,
+"trailer_key": "IrQt_aSddJY",
+"title": "베놈",
+"vote_average": 6.835,
+"vote_count": 15966,
+"movie_like_users": []
+}
+},
+{
+"model": "movies.Actor",
+"pk": 145121,
+"fields": {
+"name": "피에르 니네이"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 910944,
+"fields": {
+"name": "Bastien Bouillon"
+}
+},
+{
+"model": "movies.Director",
+"pk": 3972786,
+"fields": {
+"name": "Neige de la Patellière"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 56322,
+"fields": {
+"name": "에이미 폴러"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 1903874,
+"fields": {
+"name": "마야 호크"
+}
+},
+{
+"model": "movies.Director",
+"pk": 182001,
+"fields": {
+"name": "켈시 만"
+}
+},
+{
+"model": "movies.Movie",
+"pk": 1022789,
+"fields": {
+"actors": [
+56322,
+1903874
+],
+"adult": false,
+"director": 182001,
+"genres": [
+16,
+10751,
+12,
+35,
+18
+],
+"overview": "13살이 된 라일리의 행복을 위해 매일 바쁘게 머릿속 감정 컨트롤 본부를 운영하는 ‘기쁨’, ‘슬픔’, ‘버럭’, ‘까칠’, ‘소심’. 그러던 어느 날, 낯선 감정인 ‘불안’, ‘당황’, ‘따분’, ‘부럽’이가 본부에 등장하고, 언제나 최악의 상황을 대비하며 제멋대로인 ‘불안’이와 기존 감정들은 계속 충돌한다. 결국 새로운 감정들에 의해 본부에서 쫓겨나게 된 기존 감정들은 다시 본부로 돌아가기 위해 위험천만한 모험을 시작하는데…",
+"popularity": 878.959,
+"poster_path": "/x2BHx02jMbvpKjMvbf8XxJkYwHJ.jpg",
+"release_date": "2024-06-11",
+"runtime": 97,
+"trailer_key": "CQO5tmsUst0",
+"title": "인사이드 아웃 2",
+"vote_average": 7.592,
+"vote_count": 4750,
+"movie_like_users": []
+}
+},
+{
+"model": "movies.Actor",
+"pk": 934,
+"fields": {
+"name": "러셀 크로우"
+}
+},
+{
+"model": "movies.Actor",
+"pk": 73421,
+"fields": {
+"name": "호아킨 피닉스"
+}
+},
+{
+"model": "movies.Director",
+"pk": 578,
+"fields": {
+"name": "리들리 스콧"
+}
+}
+]

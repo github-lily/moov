@@ -158,3 +158,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'accounts.User'
+
+TMDB_API_KEY = '1593e61ad102246a93537bf80f459601'
