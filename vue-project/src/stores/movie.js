@@ -25,6 +25,7 @@ export const useMovieStore = defineStore('movie', () => {
       .then((res) => {
         // console.log(res.data)
         movies.value = res.data
+        console.log(movies)
       })
       .catch((err) => {
         console.log(err)

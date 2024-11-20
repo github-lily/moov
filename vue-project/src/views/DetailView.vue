@@ -28,7 +28,7 @@ onMounted(() => {
     url: `${store.API_URL}/api/v1/movies/${route.params.id}/`
   })
     .then((res) => {
-      // console.log(res.data)
+      console.log(res.data)
       movie.value = res.data
     })
     .catch((err) => {
