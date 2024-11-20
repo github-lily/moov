@@ -4,7 +4,7 @@
       <nav class="navbar navbar-expand-lg bg-body-tertiary" >
 
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">MOOV.</a>
+          <a class="navbar-brand" href="#" @click="GoToHome">MOOV.</a>
           
           <!-- 화면 줄어들 때 -->
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,10 +15,10 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#" >홈</a>
+                <a class="nav-link" aria-current="page" href="#" @click="GoToHome" >홈</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">내가 찜한 리스트</a>
+                <a class="nav-link" href="#" @click="GoToLikeMovies">내가 찜한 리스트</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#" >마이페이지</a>
@@ -45,17 +45,24 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
+
+const GoToHome = () => {
+  router.push({name:'MovieView'})
+}
+
+const GoToLikeMovies =  () => {
+  router.push({name:'LikeMoviesView'})
+}
 </script>
 
 <style scoped>
 
 /* nav bar */
-body {
-  position: relative;
-}
 
-.contanier {
+.container {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -70,6 +77,9 @@ body {
   padding-left: 50px;
   padding-right: 50px;
   background-color: red;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .bg-body-tertiary {
@@ -78,7 +88,6 @@ body {
 
 .navbar-brand {
   font-size: 20px;
-  font-family: 'Krona One';
   font-weight: bold;
   margin-right: 50px;
 }
