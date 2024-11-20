@@ -14,12 +14,13 @@
       </div>
     </div>
     <h3>Today's recommendation</h3>
-    <div class="movielist">
+    <div>
+      <!-- 장르 선택 -->
       <div>
-        <label for="genre-select">Select Genre: </label>
         <select id="genre-select" v-model="selectedGenre">
-          <option value="">All Genre</option>
-          <option v-for="genre in genres" :value="genre">{{ genre }}</option>
+          <option value="" selected disabled hidden>All Genre</option>
+          <option v-for="genre in genres" 
+          :key="genre.id" :value="genre.name">{{ genre.name }}</option>
         </select>
       </div>
       <!-- 영화 12개만 출력 -->
@@ -41,29 +42,67 @@ const store = useMovieStore()
 const goToTest = () => {
   router.push({name:'TestView'})
 }
-// 영화 장르
-const genres = ref(["액션", "모험", "애니메이션", "코미디", "범죄", "다큐멘터리", "드라마", "가족", "판타지", "역사", "공포", "음악", "미스터리", "로맨스", "SF", "TV 영화", "스릴러", "전쟁", "서부"])
-const selectedGenre = ref("")
-
-// 장르별 필터
-const filteredMovies = computed(() => {
-  if (!selectedGenre.value) {
-    return store.movies
-  }
-  return store.movies.filter(movie => movie.genre.includes(selectedGenre.value))
-})
-
 
 onMounted(() => {
   // mount 되기전에 store에 있는 전체 게시글 요청 함수를 호출
-  console.log('before getmovies')
+  // console.log('before getmovies')
   
   store.getMovies()
   
-  console.log(store.movies)
-  console.log('end of getmovies')
+  // console.log(store.movies)
+  // console.log('end of getmovies')
 
 })
+
+// 영화 장르 (id와 name이 매칭된 형태로 저장)
+const genres = ref([
+  { id: 28, name: "Action" },
+  { id: 12, name: "Adventure" },
+  { id: 16, name: "Animation" },
+  { id: 35, name: "Comedy" },
+  { id: 80, name: "Crime" },
+  { id: 99, name: "Documentary" },
+  { id: 18, name: "Drama" },
+  { id: 10751, name: "Family" },
+  { id: 14, name: "Fantasy" },
+  { id: 36, name: "History" },
+  { id: 27, name: "Horror" },
+  { id: 10402, name: "Music" },
+  { id: 9648, name: "Mystery" },
+  { id: 10749, name: "Romance" },
+  { id: 878, name: "Science Fiction" },
+  { id: 10770, name: "TV Movie" },
+  { id: 53, name: "Thriller" },
+  { id: 10752, name: "War" },
+  { id: 37, name: "Western" }
+])
+const selectedGenre = ref("")
+
+// console.log('movie:', store.movies.value)
+
+// 장르별 필터
+const filteredMovies = computed(()=> {
+  return store.movies.filter(function(movie) {
+    // console.log('movieGenre:', movie)
+    return movie.genre === selectedGenre.value})
+})
+
+
+// // filteredMovies를 장르별로 필터링
+// const filteredMovies = computed(() => {
+//   if (!selectedGenre.value) {
+//     // store.movies가 배열인지 확인하고, 배열이 아닌 경우 빈 배열 반환
+//     return Array.isArray(store.movies) ? store.movies : [];
+//   }
+//   // 선택된 장르와 일치하는 영화만 필터링하고, 배열인지 확인
+//   const selectedGenreId = genres.value.find(genre => genre.name === selectedGenre.value)?.id;
+//   return Array.isArray(store.movies) 
+//     ? store.movies.filter(movie => movie.genres.includes(selectedGenreId))
+//     : []; // 배열이 아닌 경우 빈 배열 반환
+// });
+
+
+
 </script>
 
 <style scoped>
@@ -90,7 +129,7 @@ body {
 
 .intro-left {
   height: 100%;
-  width: 70%;
+  width: 70%; 
   margin-right: 20px;
   background-color: white;
   border-radius: 20px;

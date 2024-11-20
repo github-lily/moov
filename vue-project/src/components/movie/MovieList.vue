@@ -15,6 +15,7 @@ import { useMovieStore } from '@/stores/movie';
 const store = useMovieStore()
 
 
+
 </script>
 
 
