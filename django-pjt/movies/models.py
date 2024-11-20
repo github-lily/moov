@@ -15,12 +15,16 @@ class Movie(models.Model) :
     title = models.CharField(max_length=100)
     overview = models.TextField(blank=True)
     release_date = models.DateTimeField(blank=True)
-    level = models.IntegerField(blank=True)
     poster_path = models.CharField(max_length=200, blank=True)
     runtime = models.IntegerField(blank=True, null=True)       # 분 단위로 저장 # null=True: 데이터베이스에서 NULL 값을 허용한다는 의미.
     genres = models.ManyToManyField(Genre)
     actors = models.ManyToManyField(Actor)
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movies')
+    vote_count = models.IntegerField(default=0)
+    vote_average = models.FloatField(default=0.0)
+    original_language = models.CharField(max_length=50, null=True)
+
+
 
 
 class Review(models.Model) :
