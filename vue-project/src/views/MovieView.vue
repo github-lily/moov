@@ -1,18 +1,21 @@
 <template>
   <div>
     <h1>Main Movie Page</h1>
-    <RouterLink :to="{name:'tmdbPopular'}">인기 순위</RouterLink> |
-    <RouterLink :to="{name:'tmdbTopRated'}">역대 순위</RouterLink>
+    <MovieList
+      v-for="movie in store.movies"
+      :key="movie.id"
+      :movie="movie"
+     /> 
+    </div>
+    
     <hr>
-    <!-- <RouterLink :to="{ name: 'CreateView' }">Create</RouterLink> -->
     <RouterView />
-  </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
+import MovieList from '@/components/movie/MovieList.vue';
 import { useMovieStore } from '@/stores/movie'
-import { RouterLink } from 'vue-router'
 
 const store = useMovieStore()
 
@@ -21,7 +24,10 @@ onMounted(() => {
   console.log('before getmovies')
   
   store.getMovies()
+
   console.log('end of getmovies')
+
+  console.log(store.movies)
 })
 </script>
 
