@@ -14,18 +14,39 @@
       </div>
     </div>
     <div class="movielist">
-      <MovieList/> 
+      <div>
+        <label for="genre-select">Select Genre: </label>
+        <select id="genre-select">
+          <option value="">All Genre</option>
+          <option v-for="genre in genres" value="">{{ genre }}</option>
+        </select>
+      </div>
+      <!-- 영화 12개만 출력 -->
+      <MovieList :movies="filteredMovies.slice(0,12)"/>
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import MovieList from '@/components/movie/MovieList.vue';
 import { useMovieStore } from '@/stores/movie'
 import HeaderNav from '@/components/common/HeaderNav.vue';
 
 const store = useMovieStore()
+
+// 영화 장르
+const genres = ref(["액션", "모험", "애니메이션", "코미디", "범죄", "다큐멘터리", "드라마", "가족", "판타지", "역사", "공포", "음악", "미스터리", "로맨스", "SF", "TV 영화", "스릴러", "전쟁", "서부"])
+const selectedGenre = ref("")
+
+// 장르별 필터
+const filteredMovies = computed(() => {
+  if (!selectedGenre.value) {
+    return store.movies
+  }
+  return store.movies.filter(movie => movie.genre.includes(selectedGenre.value))
+})
+
 
 onMounted(() => {
   // mount 되기전에 store에 있는 전체 게시글 요청 함수를 호출
@@ -112,4 +133,8 @@ body {
   align-self: end;
   color: rgb(148, 148, 148);
 }
+
+
+
+
 </style>
