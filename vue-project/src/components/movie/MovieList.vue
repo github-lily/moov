@@ -1,12 +1,10 @@
 <template>
-  <div class="movie-list">
-    <div class="card">      
+  <div class="movie-grid">
       <MovieListItem 
       v-for="movie in store.movies"
         :key="movie.id"
         :movie="movie"
       />
-    </div>
   </div>
 </template>
 
@@ -21,16 +19,29 @@ const store = useMovieStore()
 
 
 <style>
-.movie-list {
+.movie-grid {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
   flex-wrap: wrap;
   gap: 20px;
+  padding: 20px;
+}
+.movie-grid .movie-card {
+  width: calc((100% - 40px) / 3);
+  min-width: 300px;
 }
 
-.card {
-  border: beige, 1px, solid;
-  width: 200px;
-  padding: 15px;
-  
+@media screen and (max-width: 999px) {
+  .movie-grid .movie-card {
+    width: calc((100% - 20px) / 2);
+  }
+}
+
+@media screen and (max-width: 649px) {
+  .movie-grid .movie-card {
+    width: 100%;
+  }
 }
 </style>

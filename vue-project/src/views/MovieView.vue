@@ -10,9 +10,10 @@
       </div>
       <div class="intro-right">
         <div class="mainmovie"></div>
-        <div class="test"></div>
+        <button class="test" @click="goToTest">TEST &#9654</button>
       </div>
     </div>
+    <h3>Today's recommendation</h3>
     <div class="movielist">
       <MovieList/> 
     </div>
@@ -24,8 +25,14 @@ import { onMounted } from 'vue'
 import MovieList from '@/components/movie/MovieList.vue';
 import { useMovieStore } from '@/stores/movie'
 import HeaderNav from '@/components/common/HeaderNav.vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const store = useMovieStore()
+
+const goToTest = () => {
+  router.push({name:'TestView'})
+}
 
 onMounted(() => {
   // mount 되기전에 store에 있는 전체 게시글 요청 함수를 호출
@@ -41,7 +48,6 @@ onMounted(() => {
 
 <style scoped>
 
-/* nav bar */
 body {
   position: relative;
 }
@@ -53,13 +59,13 @@ body {
     align-items: center;
 }
 
-
 /* --------------------------------------------------------- */
 /* nav bar 하단 */
 .intro {
   width: 100%;
   height: 500px;
   display: flex;
+  margin-bottom: 30px;
 }
 
 .intro-left {
@@ -92,6 +98,11 @@ body {
   background-color: rgb(255, 255, 115) !important; 
   border-radius: 50%;
   align-self: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Krona One';
+  border: none;
 }
 
 .introtext {
@@ -111,5 +122,12 @@ body {
   letter-spacing: -0.1em;
   align-self: end;
   color: rgb(148, 148, 148);
+}
+
+h3 {
+  font-size: 2em;
+  font-family: 'Krona One';
+  color: white;
+  margin-bottom: 20px;
 }
 </style>
