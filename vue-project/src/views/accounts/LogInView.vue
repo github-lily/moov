@@ -10,6 +10,7 @@
       <div>
         <button class="btn btn-primary" type="submit">Log In</button>
       </div>
+      <!-- <p v-if="errorMessage" class="error">{{ errorMessage }}</p> -->
       <a href="#" @click="goToSignUp">회원가입</a>
     </form>
   </div>
@@ -19,11 +20,13 @@
 import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+// import { errorMessages } from 'vue/compiler-sfc';
 
 const store = useAuthStore()
 const username = ref(null)
 const password = ref(null)
 const router = useRouter()
+const errorMessage = ref(null)
 
 const logIn = function() {
   const payload = {
@@ -36,6 +39,7 @@ const logIn = function() {
 const goToSignUp = () => {
   router.push({name:'SignUpView'})
 }
+
 
 </script>
 
@@ -113,4 +117,11 @@ a {
   font-size: 12px;
   font-family: 'NoTo Sans Kr';
 }
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
 </style>

@@ -33,10 +33,6 @@ export const useAuthStore = defineStore('auth', () => {
       .then((res) => {
         console.log(res)
         console.log('회원가입 성공')
-        // 로그인까지 한번에
-        const password = password1
-        logIn({username, password})
-        // 나중에 TestView로 보내기! 수정해야함~!
         router.replace({name:'TestPreView'})
       })
       .catch((err) => {
@@ -63,6 +59,7 @@ export const useAuthStore = defineStore('auth', () => {
       })
       .catch((err) => {
         console.log(err)
+        alert(' 사용자 정보가 없습니다!')
       })
   }
   
