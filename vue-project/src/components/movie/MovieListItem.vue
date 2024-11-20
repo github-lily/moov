@@ -22,16 +22,24 @@
       </div>
 
     </div>
+    <!-- 여기 결정~! -->
+    <button @click="goToDetail(movie)">
+      <img class="poster" :src="poster" alt="영화포스터" >
+    </button>
   </div>
 </template>
 
 <script setup>
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const props = defineProps({
   movie:Object
 })
+
+// 포스터 이미지 URL 설정
 const poster = `https://image.tmdb.org/t/p/w500/${props.movie.poster_path}`
 
 // 줄거리가 150자를 넘어갈 경우
@@ -47,6 +55,13 @@ const isLiked = ref(false)
 const toggleLike = () => {
   isLiked.value = !isLiked.value
 }
+
+
+// 영화 클릭 시 DetailView로 이동
+const goToDetail = () => {
+  router.push({name:'DetailView', params:{id:props.movie.id}})
+}
+
 
 </script>
 
