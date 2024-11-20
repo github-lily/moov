@@ -5,7 +5,7 @@
       <div class="intro-left">
         <p class="introtext">Learn English,<br> Enjoy Movies,<br> Love the Journey!</p>
         <p class="introtext2">
-          At Moov. we help you learn English through carefully selected movies <br> that match your proficiency level. <br> Start you journey toda
+          At Moov. <br> we help you learn English through carefully selected movies <br> that match your proficiency level. <br> Start you journey today.
         </p>
       </div>
       <div class="intro-right">
@@ -41,6 +41,7 @@ const store = useMovieStore()
 const goToTest = () => {
   router.push({name:'TestView'})
 }
+
 // 영화 장르
 const genres = ref(["액션", "모험", "애니메이션", "코미디", "범죄", "다큐멘터리", "드라마", "가족", "판타지", "역사", "공포", "음악", "미스터리", "로맨스", "SF", "TV 영화", "스릴러", "전쟁", "서부"])
 const selectedGenre = ref("")
@@ -77,6 +78,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow: visible;
 }
 
 /* --------------------------------------------------------- */

@@ -7,6 +7,7 @@ import LogInView from '@/views/accounts/LogInView.vue'
 import WelcomeView from '@/views/WelcomeView.vue'
 import TestPreView from '@/views/TestPreView.vue'
 import TestView from '@/views/TestView.vue'
+import LikeMoviesView from '@/views/LikeMoviesView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,11 +48,16 @@ const router = createRouter({
       name: 'TestPreView',
       component: TestPreView
     },
-    // 테스트 페이지
     {
       path: '/test',
       name: 'TestView',
       component: TestView
+    },
+    // 좋아요한 페이지
+    {
+      path: '/likeMovies',
+      name: 'LikeMoviesView',
+      component: LikeMoviesView
     },
   ]
 })
