@@ -1,11 +1,6 @@
 <template>
-  <div>
-    <h3>Movie List</h3>
-      <p>제목 : {{ movie.title }}</p>
-      <img :src="poster" alt="영화포스터" style="height:300px">
-      <p>개요 : {{ movie.overview }}</p>
-      <p>장르 : {{ movie.genre }}</p>
-      <p>개봉일 : {{ movie.release_date }}</p>
+  <div class="movie-card">
+    <img class="poster" :src="poster" alt="영화포스터" >
   </div>
 </template>
 
@@ -17,9 +12,25 @@ const props = defineProps({
 })
 const poster = `https://image.tmdb.org/t/p/w500/${props.movie.poster_path}`
 
-
 </script>
 
 <style>
+.movie-card {
+  width: 100%;
+  transform-origin: center;
+  padding: 10px;
+}
+
+.poster {
+  width: 90%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+  transition: transform 0.3s ease;
+}
+
+.poster:hover {
+  transform: scale(1.05); 
+}
 
 </style>
