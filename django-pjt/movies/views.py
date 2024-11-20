@@ -178,7 +178,7 @@ def movie_list(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def movie_detail(request, movie_pk):
-    movie = get_object_or_404(movie, pk=movie_pk)
+    movie = get_object_or_404(Movie, pk=movie_pk)
     # if request.method == 'GET':
     serializer = MovieSerializer(movie)
     return Response(serializer.data)
@@ -186,8 +186,8 @@ def movie_detail(request, movie_pk):
 # 영화 전체 댓글 조회
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def comment_list(request):
-    comments = Moviecomment.objects.all()
+def comment_list(request,movie_pk):
+    comments = Moviecomment.objects.filter(movie_id=movie_pk)
     serializer = CommentSerializer(comments, many=True)
     return Response(serializer.data)
 
@@ -205,18 +205,22 @@ def comment_create(request, movie_pk):
 # 영화 상세정보에서 댓글 조회, 삭제, 수정
 @api_view(['GET', 'DELETE', 'PUT'])
 @permission_classes([IsAuthenticated])
-def comment_detail(request, comment_pk):
-    comment = get_object_or_404(Moviecomment, pk=comment_pk)
+def comment_detail(request,  movie_pk, comment_pk):
+    comment = get_object_or_404(Moviecomment, pk=comment_pk, movie_id=movie_pk)
     
     if request.method == 'GET':
         serializer = CommentSerializer(comment)
         return Response(serializer.data)
 
     elif request.method == 'DELETE':
+        if request.user != comment.user:
+            return Response({'detail': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDEN)
         comment.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
     elif request.method == 'PUT':
+        if request.user != comment.user:
+            return Response({'detail': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDEN)
         serializer = CommentSerializer(comment, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()

@@ -17,6 +17,7 @@ class MovieSerializer(serializers.ModelSerializer):
 
 # 리뷰
 class CommentSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(read_only=True)  # 유저 이름을 문자열로 표시
     class Meta:
         model = Moviecomment
         fields = '__all__'
