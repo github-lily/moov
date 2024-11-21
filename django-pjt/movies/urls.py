@@ -10,7 +10,7 @@ urlpatterns = [
     # 영화 데이터 가져오기
     path('movies/getdatas/', views.getdatas),
     # 댓글 조회 및 생성
-    path('movies/<int:movie_pk>/comments/', views.comment_list_create),
+    path('movies/<int:movie_pk>/comments/', views.comment_list),
 
 
 ]

@@ -8,6 +8,7 @@ import WelcomeView from '@/views/WelcomeView.vue'
 import TestPreView from '@/views/TestPreView.vue'
 import TestView from '@/views/TestView.vue'
 import LikeMoviesView from '@/views/LikeMoviesView.vue'
+import MovieComment from '@/components/movie/MovieComment.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -58,6 +59,12 @@ const router = createRouter({
       path: '/likeMovies',
       name: 'LikeMoviesView',
       component: LikeMoviesView
+    },
+    // 좋아요한 페이지
+    {
+      path: '/movies/:id/comments',
+      name: 'MovieComment',
+      component: MovieComment
     },
   ]
 })
