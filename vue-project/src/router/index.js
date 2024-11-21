@@ -62,12 +62,13 @@ const router = createRouter({
       name: 'LikeMoviesView',
       component: LikeMoviesView
     },
-    // 좋아요한 페이지
+    // 영화 댓글
     {
       path: '/movies/:id/comments',
       name: 'MovieComment',
       component: MovieComment
     },
+
   ]
 })
 
