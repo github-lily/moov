@@ -21,7 +21,6 @@
 <script setup>
 import axios from 'axios'
 import { onMounted, ref, computed } from 'vue'
-import { useMovieStore } from '@/stores/movie'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import HeaderNav from '@/components/common/HeaderNav.vue'
