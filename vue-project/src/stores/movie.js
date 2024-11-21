@@ -53,6 +53,60 @@ export const useMovieStore = defineStore('movie', () => {
 		})
 	}
 
+   // 댓글 리스트 요청
+   const comments = ref([])
+   const getMovieComments = function (movieId) {
+     axios({
+       method: 'get',
+       url: `${API_URL}/api/v1/movies/${movieId}/comments/`,
+       headers: {
+         Authorization: `Token ${authStore.token}`
+       }
+     })
+       .then((res) => {
+         comments.value = res.data
+       })
+       .catch((err) => {
+         console.log(err)
+       })
+   }
+ 
+   // 댓글 작성
+   const addComment = function (movieId, content) {
+    console.log('movie.js',movieId)
+     axios({
+       method: 'post',
+       url: `${API_URL}/api/v1/movies/${movieId}/comments`,
+       headers: {
+         Authorization: `Token ${authStore.token}`
+       },
+       data: { content }
+     })
+       .then((res) => {
+         comments.value.push(res.data)
+       })
+       .catch((err) => {
+         console.log('Failed to add comment:', err)
+       })
+   }
+ 
+   // 댓글 삭제
+   const deleteComment = function (commentId) {
+     axios({
+       method: 'delete',
+       url: `${API_URL}/api/v1/comments/${commentId}/`,
+       headers: {
+         Authorization: `Token ${authStore.token}`
+       }
+     })
+       .then(() => {
+         comments.value = comments.value.filter(comment => comment.id !== commentId)
+       })
+       .catch((err) => {
+         console.log(err)
+       })
+   }
 
-  return { movies, API_URL, getMovies, getMovieDetail}
+
+  return { movies, API_URL, getMovies, getMovieDetail, comments, getMovieComments, addComment, deleteComment}
 }, { persist: true })
