@@ -26,11 +26,15 @@
       <!-- 영화 12개만 출력 -->
       <MovieList :movies="filteredMovies.slice(0,12)"/>
     </div>
+
+      <!-- 영화 목록 -->
+    <MovieList :movies="paginatedMovies" />
+
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, watch } from 'vue'
 import MovieList from '@/components/movie/MovieList.vue';
 import { useMovieStore } from '@/stores/movie'
 import HeaderNav from '@/components/common/HeaderNav.vue';
@@ -42,6 +46,7 @@ const store = useMovieStore()
 const goToTest = () => {
   router.push({name:'TestView'})
 }
+
 
 // // 영화 장르
 // const genres = ref(["액션", "모험", "애니메이션", "코미디", "범죄", "다큐멘터리", "드라마", "가족", "판타지", "역사", "공포", "음악", "미스터리", "로맨스", "SF", "TV 영화", "스릴러", "전쟁", "서부"])
@@ -94,12 +99,19 @@ const selectedGenre = ref("")
 // console.log('movie:', store.movies.value)
 
 // 장르별 필터
-const filteredMovies = computed(()=> {
-  return store.movies.filter(function(movie) {
-    // console.log('movieGenre:', movie)
-    return movie.genre === selectedGenre.value})
-})
+const filteredMovies = computed(() => {
+  if (!selectedGenre.value) {
+    return store.movies.value || [];
+  }
+  
+  return (store.movies.value || []).filter(movie => 
+    movie.genre && movie.genre.includes(selectedGenre.value)
+  );
+});
 
+watch(selectedGenre, () => {
+  currentPage.value = 1;
+});
 
 // // filteredMovies를 장르별로 필터링
 // const filteredMovies = computed(() => {
@@ -204,7 +216,6 @@ h3 {
   color: white;
   margin-bottom: 20px;
 }
-
 
 
 </style>

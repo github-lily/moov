@@ -29,7 +29,8 @@ const router = createRouter({
     {
       path: '/movies/:id',
       name: 'DetailView',
-      component: DetailView
+      component: DetailView,
+      props: true
     },
     // 회원가입
     {
@@ -49,12 +50,13 @@ const router = createRouter({
       name: 'TestPreView',
       component: TestPreView
     },
+    // 테스트 페이지
     {
       path: '/test',
       name: 'TestView',
       component: TestView
     },
-    // 좋아요한 페이지
+    // 좋아요한 페이지 목록
     {
       path: '/likeMovies',
       name: 'LikeMoviesView',
