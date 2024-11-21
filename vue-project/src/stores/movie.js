@@ -23,7 +23,7 @@ export const useMovieStore = defineStore('movie', () => {
       }
     })
       .then((res) => {
-        // console.log(res.data)
+        console.log(res.data)
         movies.value = res.data
         console.log(movies)
       })
