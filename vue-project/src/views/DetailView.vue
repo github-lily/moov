@@ -2,7 +2,9 @@
   <div class="container">
     <HeaderNav/>
     <div class="movie-container">
-      <div class="movie-poster"></div>
+      <div class="movie-poster">
+        <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="poster">
+      </div>
       <div class="movie-contents"></div>
     </div>
 
@@ -17,13 +19,16 @@
 <script setup>
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
-import { useMovieStore } from '@/stores/movie'
 import { useRoute } from 'vue-router'
+import { useMovieStore } from '@/stores/movie'
 import { useAuthStore } from '@/stores/auth'
+import { useUserStore } from '@/stores/user'
+
 import MovieComment from '@/components/movie/MovieComment.vue'
 import HeaderNav from '@/components/common/HeaderNav.vue'
 
 const store = useMovieStore()
+const userStore = useUserStore()
 const authStore = useAuthStore()
 const route = useRoute()
 const movie = ref(null)
@@ -31,23 +36,10 @@ const movie = ref(null)
 
 // DetailView가 마운트되기전에 DRF로 단일 게시글 조회를 요청 후 응답데이터를 저장
 onMounted(() => {
-  axios({
-    method: 'get',
-    url: `${store.API_URL}/api/v1/movies/${route.params.id}/`,
-    headers: {
-      Authorization:`Token ${authStore.token}`
-    }
-  })
-    .then((res) => {
-      // console.log(res.data)
-      movie.value = res.data
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+  store.getMovieDetail()
+  userStore.getUser()
 })
 
-const poster = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
 
 </script>
 
