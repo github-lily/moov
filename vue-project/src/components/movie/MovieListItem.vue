@@ -1,3 +1,5 @@
+<!-- MovieListItem.vue -->
+
 <template>
   <div class="movie-card">
     <div class="poster-container">
@@ -7,6 +9,7 @@
       <!-- 마우스를 올릴 경우 -->
       <div class="overlay">
 
+        <!-- <a class="movie-info" @click="goToDetail(movie)" :href="`/movies/${movie.id}`"> -->
         <div class="movie-info" @click="goToDetail(movie)">
           <h3 class="movie-title">{{ movie.title }}</h3>
           <p class="overview">{{ truncateOverview(movie.overview) }}</p>
@@ -129,7 +132,7 @@ const goToDetail = (movie) => {
 }
 
 .overview {
-  font-size: 0.8em;
+  font-size: 0.9em;
   line-height: 1.4;
   margin: 0;
   padding: 0 10px;
