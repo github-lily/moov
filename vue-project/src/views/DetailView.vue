@@ -21,7 +21,6 @@
 <script setup>
 import axios from 'axios'
 import { onMounted, ref, computed } from 'vue'
-import { useMovieStore } from '@/stores/movie'
 import { useRoute } from 'vue-router'
 import { useMovieStore } from '@/stores/movie'
 import { useAuthStore } from '@/stores/auth'
