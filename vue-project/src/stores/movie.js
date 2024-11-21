@@ -55,5 +55,5 @@ export const useMovieStore = defineStore('movie', () => {
     }
 
 
-  return { movies, API_URL, getMovies,   }
+  return { movies, API_URL, getMovies,}
 }, { persist: true })

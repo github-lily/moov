@@ -3,29 +3,25 @@
     <div class="poster-container">
 
       <img class="poster" :src="poster" alt="영화포스터" >
-
+      
+      <!-- 마우스를 올릴 경우 -->
       <div class="overlay">
 
-        <div class="movie-info">
+        <div class="movie-info" @click="goToDetail(movie)">
           <h3 class="movie-title">{{ movie.title }}</h3>
           <p class="overview">{{ truncateOverview(movie.overview) }}</p>
 
           <button 
             class="likebtn" 
             :class="{ 'liked': isLiked }" 
-            @click="toggleLike"
-          >
-          &#x2665;
+            @click.stop="toggleLike">
+             &#x2665;
           </button>
 
         </div>
       </div>
 
     </div>
-    <!-- 여기 결정~! -->
-    <button @click="goToDetail(movie)">
-      <img class="poster" :src="poster" alt="영화포스터" >
-    </button>
   </div>
 </template>
 
@@ -58,8 +54,9 @@ const toggleLike = () => {
 
 
 // 영화 클릭 시 DetailView로 이동
-const goToDetail = () => {
-  router.push({name:'DetailView', params:{id:props.movie.id}})
+const goToDetail = (movie) => {
+  router.push({
+    name:'DetailView', params:{id:props.movie.id}})
 }
 
 
@@ -111,6 +108,7 @@ const goToDetail = () => {
 .movie-info {
   color: white;
   width: 100%;
+  height: 100%;
   padding: 20px;
   text-align: left;
   display: flex;

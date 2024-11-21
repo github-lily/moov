@@ -11,9 +11,17 @@
 <script setup>
 import MovieListItem from '@/components/movie/MovieListItem.vue'
 import { useMovieStore } from '@/stores/movie';
+import { defineProps } from 'vue';
 
 const store = useMovieStore()
 
+
+const props = defineProps({
+  movies: {
+    type: Array,
+    required: true,
+  }
+})
 
 
 </script>
