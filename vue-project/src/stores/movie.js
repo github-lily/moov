@@ -31,5 +31,29 @@ export const useMovieStore = defineStore('movie', () => {
         console.log(err)
       })
   }
+
+    // 댓글 조회
+    const logIn = function(payload) {
+      const {username, password} = payload
+  
+      axios ({
+        method:'post',
+        url:`${API_URL}/accounts/login/`,
+        data: {
+          username, password,
+        }
+      })
+        .then((res) => {
+          token.value = res.data.key
+          router.push({name : 'MovieView'})
+          console.log('로그인 성공')
+        })
+        .catch((err) => {
+          console.log(err)
+          alert(' 사용자 정보가 없습니다!')
+        })
+    }
+
+
   return { movies, API_URL, getMovies,   }
 }, { persist: true })
