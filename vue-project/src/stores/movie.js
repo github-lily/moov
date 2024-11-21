@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import { useRouter } from 'vue-router'
+import { useRouter,useRoute } from 'vue-router'
 import { useAuthStore } from './auth'
 
 export const useMovieStore = defineStore('movie', () => {
@@ -13,8 +13,7 @@ export const useMovieStore = defineStore('movie', () => {
 
   // DRF로 전체 게시글 요청을 보내고 응답을 받아 movies에 저장하는 함수
   const getMovies = function () {
-    console.log(authStore.token)
-    console.log('-=================================')
+    console.log('token',authStore.token)
     axios({
       method: 'get',
       url: `${API_URL}/api/v1/movies/`,
@@ -25,11 +24,35 @@ export const useMovieStore = defineStore('movie', () => {
       .then((res) => {
         // console.log(res.data)
         movies.value = res.data
-        console.log(movies)
+        // console.log(movies)
       })
       .catch((err) => {
         console.log(err)
       })
   }
-  return { movies, API_URL, getMovies,   }
+
+
+  // 영화 상세 정보를 받아오는 함수
+	const route = useRoute()
+	const movie = ref(null)
+	const getMovieDetail = function () {
+    console.log('route.params.id:', route.params.id) // 현재 경로 파라미터 id 확인
+	  axios({
+		method: 'get',
+		url: `${API_URL}/api/v1/movies/${route.params.id}`,
+		headers: {
+		  Authorization: `Token ${authStore.token}`
+	  }
+	  })
+		.then((res) => {
+			movie.value = res.data
+      console.log('movie.js',movie.value)
+		})
+		.catch((err) => {
+			console.log(err)
+		})
+	  }
+
+
+  return { movies, API_URL, getMovies, getMovieDetail}
 }, { persist: true })

@@ -7,6 +7,8 @@ import LogInView from '@/views/accounts/LogInView.vue'
 import WelcomeView from '@/views/WelcomeView.vue'
 import TestPreView from '@/views/TestPreView.vue'
 import TestView from '@/views/TestView.vue'
+import LikeMoviesView from '@/views/LikeMoviesView.vue'
+import MovieComment from '@/components/movie/MovieComment.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,7 +29,8 @@ const router = createRouter({
     {
       path: '/movies/:id',
       name: 'DetailView',
-      component: DetailView
+      component: DetailView,
+      props: true
     },
     // 회원가입
     {
@@ -53,6 +56,19 @@ const router = createRouter({
       name: 'TestView',
       component: TestView
     },
+    // 좋아요한 페이지 목록
+    {
+      path: '/likeMovies',
+      name: 'LikeMoviesView',
+      component: LikeMoviesView
+    },
+    // 영화 댓글
+    {
+      path: '/movies/:id/comments',
+      name: 'MovieComment',
+      component: MovieComment
+    },
+
   ]
 })
 
