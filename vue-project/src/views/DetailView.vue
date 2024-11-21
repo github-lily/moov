@@ -4,10 +4,8 @@
 
     <div class="movie-container">
       <div class="movie-poster">
-        <img v-if="moviePoster" :src="moviePoster" alt="Movie Poster">
-        <p v-else>Loading...</p>
+        <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="poster">
       </div>
-
       <div class="movie-contents"></div>
     </div>
 
@@ -25,10 +23,12 @@ import axios from 'axios'
 import { onMounted, ref, computed } from 'vue'
 import { useMovieStore } from '@/stores/movie'
 import { useRoute } from 'vue-router'
+import { useMovieStore } from '@/stores/movie'
 import { useAuthStore } from '@/stores/auth'
 import HeaderNav from '@/components/common/HeaderNav.vue'
 
 const store = useMovieStore()
+const userStore = useUserStore()
 const authStore = useAuthStore()
 const route = useRoute()
 const movie = ref(null)
@@ -40,20 +40,11 @@ const moviePoster = computed(() => {
 })
 
 onMounted(() => {
-  axios({
-    method: 'get',
-    url: `${store.API_URL}/api/v1/movies/${route.params.id}/`,
-    headers: {
-      Authorization: `Token ${authStore.token}`
-    }
-  })
-    .then((res) => {
-      movie.value = res.data
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+  store.getMovieDetail()
+  userStore.getUser()
 })
+
+
 </script>
 
 <style scoped>
