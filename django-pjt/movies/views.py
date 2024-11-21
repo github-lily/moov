@@ -4,7 +4,7 @@ from django.conf import settings
 import requests, json
 
 
-from .serializers import MovieListSerializer, MovieSerializer, CommentSerializer
+from .serializers import MovieDetailSerializer, MovieSerializer, CommentSerializer
 from .models import Movie, Actor, Genre, Moviecomment
 from accounts.models import User
 
@@ -155,23 +155,14 @@ def getdatas():
 
 
 
-@api_view(['GET', 'POST'])
+# 영화 목록 조회
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def movie_list(request):
-    # 영화 목록 조회
-    if request.method == 'GET':
-        # movies = get_list_or_404(Movie)
-        movies = Movie.objects.all()
-        serializer = MovieListSerializer(movies, many=True)
-        return Response(serializer.data)
+    movies = Movie.objects.all()
+    serializer = MovieSerializer(movies, many=True)
+    return Response(serializer.data)
 
-    # # 영화 목록 수정(필요없음)
-    # elif request.method == 'POST':
-    #     serializer = MovieSerializer(data=request.data)
-    #     if serializer.is_valid(raise_exception=True):
-    #         # serializer.save()
-    #         serializer.save(user=request.user)
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 # 영화 상세 페이지 조회
@@ -227,10 +218,10 @@ def comment_detail(request,  movie_pk, comment_pk):
             return Response(serializer.data)
 
 
-# 영화 좋아요(찜목록)
+# 영화를 좋아요 한 사람 목록
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def likes(request, movie_pk):
+def like_movies(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     if movie.movie_like_users.filter(pk=request.user.pk).exists():
         movie.movie_like_users.remove(request.user)
