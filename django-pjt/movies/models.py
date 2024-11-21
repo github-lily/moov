@@ -38,7 +38,7 @@ class Movie(models.Model) :
 
 class Moviecomment(models.Model) :
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)    # 댓글 쓴 사람
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)  # 영화와 연결
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='comments')  # 영화와 연결
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

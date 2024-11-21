@@ -12,26 +12,32 @@
     <div class="comments-container">
       <p class="comment-title">Comments</p>
       <div class="comments-list">
-        <div class="comments"></div>
+        <div class="comments">
+          <MovieComment 
+          :movieId = 'movieId'/>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import axios from 'axios'
 import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import HeaderNav from '@/components/common/HeaderNav.vue'
 import { useUserStore } from '@/stores/user'
+import { useMovieStore } from '@/stores/movie'
+import MovieComment from '@/components/movie/MovieComment.vue'
 
 const store = useMovieStore()
 const userStore = useUserStore()
 const authStore = useAuthStore()
 const route = useRoute()
 const movie = ref(null)
-
+const movieId = route.params.id
+console.log("===========")
+console.log('detail.id',movieId)
 const moviePoster = computed(() => {
   return movie.value && movie.value.poster_path
     ? `https://image.tmdb.org/t/p/w500/${movie.value.poster_path}`
