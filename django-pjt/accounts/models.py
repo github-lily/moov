@@ -4,6 +4,5 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class User(AbstractUser) :
-    # followings = models.ManyToManyField('self', symmetrical=False, related_name='followers')
-    # 
-    nickname = models.CharField(max_length=10)
+    username = models.CharField(max_length=30, unique=True)
+    

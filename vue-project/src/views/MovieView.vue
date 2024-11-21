@@ -38,6 +38,7 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter()
 const store = useMovieStore()
+const movies = ref([])
 
 const goToTest = () => {
   router.push({name:'TestView'})
@@ -60,7 +61,8 @@ onMounted(() => {
   // mount 되기전에 store에 있는 전체 게시글 요청 함수를 호출
   // console.log('before getmovies')
   
-  store.getMovies()
+   store.getMovies()
+  movies.value = store.movies;
   
   // console.log(store.movies)
   // console.log('end of getmovies')
@@ -91,12 +93,12 @@ const genres = ref([
 ])
 const selectedGenre = ref("")
 
-// console.log('movie:', store.movies.value)
+console.log('movie:', store.movies)
 
 // 장르별 필터
 const filteredMovies = computed(()=> {
   return store.movies.filter(function(movie) {
-    // console.log('movieGenre:', movie)
+    console.log('movieGenre:', movie.genres)
     return movie.genre === selectedGenre.value})
 })
 
