@@ -37,13 +37,13 @@ export const useMovieStore = defineStore('movie', () => {
 	const movie = ref(null)
 	const getMovieDetail = function () {
     console.log('route.params.id:', route.params.id) // 현재 경로 파라미터 id 확인
-	  axios({
+	axios({
 		method: 'get',
 		url: `${API_URL}/api/v1/movies/${route.params.id}`,
 		headers: {
-		  Authorization: `Token ${authStore.token}`
-	  }
-	  })
+		Authorization: `Token ${authStore.token}`
+	}
+	})
 		.then((res) => {
 			movie.value = res.data
       console.log('movie.js',movie.value)
@@ -51,7 +51,7 @@ export const useMovieStore = defineStore('movie', () => {
 		.catch((err) => {
 			console.log(err)
 		})
-	  }
+	}
 
 
   return { movies, API_URL, getMovies, getMovieDetail}

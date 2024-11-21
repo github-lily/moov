@@ -4,7 +4,7 @@
 
     <div class="movie-container">
       <div class="movie-poster">
-        <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="poster">
+        <!-- <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="poster"> -->
       </div>
       <div class="movie-contents"></div>
     </div>
@@ -23,9 +23,9 @@ import axios from 'axios'
 import { onMounted, ref, computed } from 'vue'
 import { useMovieStore } from '@/stores/movie'
 import { useRoute } from 'vue-router'
-import { useMovieStore } from '@/stores/movie'
 import { useAuthStore } from '@/stores/auth'
 import HeaderNav from '@/components/common/HeaderNav.vue'
+import { useUserStore } from '@/stores/user'
 
 const store = useMovieStore()
 const userStore = useUserStore()
