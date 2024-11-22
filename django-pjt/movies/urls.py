@@ -10,11 +10,11 @@ urlpatterns = [
     # 영화 상세 조회 
     path('movies/<int:movie_pk>/', views.movie_detail),
     # 영화 댓글 목록
-    path('movies/comment', views.comment_list),
+    path('movies/comments', views.comment_list),
     # 영화 댓글 상세 조회
-    path('movies/comment/<int:comment_pk>', views.comment_detail),
+    path('movies/<int:movie_pk>/comments/<int:comment_pk>/', views.comment_detail),
     # 영화 댓글 제작
-    path('movies/<int:movie_pk>/comment', views.comment_create),
+    path('movies/<int:movie_pk>/comments', views.comment_create),
     # 영화 좋아요
     path('movies/<int:movie_pk>/likemovies', views.like_movies),
 
