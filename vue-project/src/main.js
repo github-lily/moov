@@ -1,5 +1,5 @@
 // main.js
-
+import axios from 'axios'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
