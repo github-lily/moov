@@ -83,7 +83,9 @@ export const useMovieStore = defineStore('movie', () => {
        data: { content }
      })
        .then((res) => {
-         comments.value.push(res.data)
+        console.log(res.data) 
+        comments.value.push(res.data)
+         
        })
        .catch((err) => {
          console.log('Failed to add comment:', err)

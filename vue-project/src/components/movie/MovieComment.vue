@@ -7,8 +7,8 @@
     <ul>
       <li v-for="comment in comments" :key="comment.id">
         {{ comment }}
-        <p><strong>{{ comment.username }}</strong>: {{ comment.content }}</p>
-        <div v-if="username === comment.username">
+        <p style="color: white;" ><strong>{{ comment.username }}</strong>: {{ comment.content }}</p>
+        <div v-if="user.username === comment.username">
           <button @click="editComment(comment)">Edit</button>
           <button @click="deleteComment(comment.id)">Delete</button>
         </div>
@@ -18,26 +18,30 @@
 </template>
 
 <script setup> 
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useMovieStore } from '@/stores/movie'
 import { defineProps } from 'vue';
 import { useUserStore } from '@/stores/user';
 
 const props = defineProps({
-  movieId:Number
+  movieId:String
 })
 
 const userStore = useUserStore()
 const authStore = useAuthStore()
 const movieStore = useMovieStore()
 const movieId = props.movieId // 현재 영화 ID를 경로에서 가져옴
+
 const comments = ref([])
 const newComment = ref('')
 const commentId = ref(0)
 // console.log('comment component',props.movieId)
 
-const user = userStore.getUser()
+const user = computed(()=> {
+  return userStore.user
+}) 
+
 console.log('comment', user)
 
 // 댓글 가져오기
@@ -45,6 +49,7 @@ const fetchComments = async () => {
   try {
     await movieStore.getMovieComments(movieId) // movieId를 전달
     comments.value = movieStore.comments
+    console.log(comments.value)
   } catch (error) {
     console.error(error)
   }
