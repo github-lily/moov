@@ -3,41 +3,70 @@
     <HeaderNav />
 
     <div class="movie-container">
-      <div class="movie-poster">
-        <!-- <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="poster"> -->
+      <div class="movie-poster">        
+        <img v-if="moviePoster" :src="moviePoster" alt="Movie Poster">
       </div>
-      <div class="movie-contents"></div>
+      <div class="movie-contents">
+        <div class="top-contents">
+          <p v-if="movie.title" class="title">{{ movie.title }}</p>
+          <p v-if="movie.runtime" class="runtime">
+            {{ Math.floor(movie.runtime / 60) }}시간 {{movie.runtime % 60}}분
+          </p>
+          <p v-if="movie.vote_average" class="vote_average">평점: {{ movie.vote_average.toFixed(1) }}</p>
+        </div>
+        <div class="botton-contents">|
+          <p class="genres" v-if="movie.genres && movie.genres.length > 0" v-for="genre in movie.genres" :key="genre.name">{{ genre.name }} </p>|
+          <p v-if="movie.director" class="director">감독: {{ movie.director.name }}</p>
+          <p class="actors-title">
+            출연진:
+            <!-- 3명까지만 출력하기 -->
+            <p class="actors" v-if="movie.actors && movie.actors.length > 0" v-for="(actor, index) in movie.actors.slice(0, 3)" :key="actor.name">&nbsp;{{ actor.name }}<span v-if="index < 2">, </span></p>
+            등
+          </p>
+
+          <p class="movie_overview" v-if="movie.overview">{{ movie.overview }}</p>
+        </div>
+      </div>
     </div>
 
     <div class="comments-container">
       <p class="comment-title">Comments</p>
       <div class="comments-list">
-        <div class="comments">
           <MovieComment 
           :movieId = 'movieId'/>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import axios from 'axios'
 import { onMounted, ref, computed } from 'vue'
+import { useMovieStore } from '@/stores/movie'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import HeaderNav from '@/components/common/HeaderNav.vue'
 import { useUserStore } from '@/stores/user'
-import { useMovieStore } from '@/stores/movie'
 import MovieComment from '@/components/movie/MovieComment.vue'
 
 const store = useMovieStore()
-const userStore = useUserStore()
 const authStore = useAuthStore()
+const userStore = useUserStore()
 const route = useRoute()
-const movie = ref(null)
+
+const movie = ref({
+  title: '',
+  runtime: null,
+  vote_average: null,
+  director: { name: '' },
+  genres: [],
+  overview: ''
+})
+
 const movieId = route.params.id
-console.log("===========")
-console.log('detail.id',movieId)
+console.log('Detail:movie',movie)
+console.log('Detail:movieId',movieId)
+
 const moviePoster = computed(() => {
   return movie.value && movie.value.poster_path
     ? `https://image.tmdb.org/t/p/w500/${movie.value.poster_path}`
@@ -45,23 +74,39 @@ const moviePoster = computed(() => {
 })
 
 onMounted(() => {
+  axios({
+    method: 'get',
+    url: `${store.API_URL}/api/v1/movies/${route.params.id}/`,
+    headers: {
+      Authorization: `Token ${authStore.token}`
+    }
+  })
+    .then((res) => {
+      movie.value = res.data
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+})
+
+onMounted(() => {
   store.getMovieDetail()
   userStore.getUser()
 })
 
-
 </script>
 
 <style scoped>
+
 .movie-container {
   height: 500px;
   width: 100%;
   /* background-color: white; */
-  border: 1px solid white;
   border-radius: 50px;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
+  margin-bottom: 100px;
 }
 
 .movie-poster {
@@ -71,17 +116,86 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* 자식 요소가 부모 영역을 벗어나지 않도록 설정 */
+  overflow: hidden;
 }
 
 img {
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .movie-contents {
   height: 100%;
   width: 50%;
-  background-color: rgb(126, 126, 126);
+  font-family: 'Noto Sans KR';
+  color: white;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+
 }
+
+.top-contents {
+  display: flex;
+  bottom: 0px;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 2em;
+  font-weight: bold;
+  margin-right: 20px;
+  margin-bottom: 0;
+}
+
+.runtime {
+  margin-right: 20px;
+  font-size: 1em;
+  margin-bottom: 5px;
+  color: #a7a7a7;
+}
+
+.vote_average {
+  margin-right: 20px;
+  font-size: 1em;
+  margin-bottom: 5px;
+  color: #a7a7a7;
+
+}
+
+.director {
+  font-weight: lighter;
+  margin-bottom: 5px;
+}
+
+
+.genres {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: lighter;
+  margin-bottom: 5px;
+}
+
+.actors-title {
+  font-weight: lighter;
+  
+}
+.actors {
+  display: inline-block;
+  font-weight: lighter;
+}
+
+.movie_overview {
+  margin-right: 60px;
+  margin-bottom: 40px;
+  color: #a7a7a7;
+
+}
+
+
 
 /* comment */
 .comment-title {
@@ -93,7 +207,9 @@ img {
 
 .comments-list {
   width: 100%;
-  background-color: #7c7c7c;
+  /* background-color: #ffffff; */
   height: 100vh;
 }
+
+
 </style>
