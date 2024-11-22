@@ -48,7 +48,6 @@ import { useRoute } from 'vue-router'
 import HeaderNav from '@/components/common/HeaderNav.vue'
 import MovieComment from '@/components/movie/MovieComment.vue'
 
-import { useMovieStore } from '@/stores/movie'
 import { useAuthStore } from '@/stores/auth'
 import { useUserStore } from '@/stores/user'
 
