@@ -3,8 +3,8 @@
     <HeaderNav />
 
     <div class="movie-container">
-      <div class="movie-poster">
-        <!-- <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="poster"> -->
+      <div class="movie-poster">        
+        <img v-if="moviePoster" :src="moviePoster" alt="Movie Poster">
       </div>
       <div class="movie-contents"></div>
     </div>
@@ -22,22 +22,23 @@
 </template>
 
 <script setup>
+import axios from 'axios'
 import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+
 import HeaderNav from '@/components/common/HeaderNav.vue'
-import { useUserStore } from '@/stores/user'
-import { useMovieStore } from '@/stores/movie'
 import MovieComment from '@/components/movie/MovieComment.vue'
 
+import { useMovieStore } from '@/stores/movie'
+import { useAuthStore } from '@/stores/auth'
+import { useUserStore } from '@/stores/user'
+
 const store = useMovieStore()
-const userStore = useUserStore()
 const authStore = useAuthStore()
+const userStore = useUserStore()
 const route = useRoute()
 const movie = ref(null)
-const movieId = route.params.id
-console.log("===========")
-console.log('detail.id',movieId)
+
 const moviePoster = computed(() => {
   return movie.value && movie.value.poster_path
     ? `https://image.tmdb.org/t/p/w500/${movie.value.poster_path}`
@@ -45,8 +46,24 @@ const moviePoster = computed(() => {
 })
 
 onMounted(() => {
+  axios({
+    method: 'get',
+    url: `${store.API_URL}/api/v1/movies/${route.params.id}/`,
+    headers: {
+      Authorization: `Token ${authStore.token}`
+    }
+  })
+    .then((res) => {
+      movie.value = res.data
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+})
+
+onMounted(() => {
   store.getMovieDetail()
-  userStore.getUser()
+  // userStore.getUser()
 })
 
 

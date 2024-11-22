@@ -1,5 +1,8 @@
 from rest_framework import serializers
 from .models import Moviecomment, Movie, Genre, Actor, Director
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
@@ -61,3 +64,9 @@ class MovieDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = '__all__'
+
+        
+class ArticleLikeListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('pk',)

@@ -12,6 +12,7 @@ export const useUserStore = defineStore('user', () => {
     const user = ref([])
     let isLike = ref(false)
     let isMovieLike = ref(false)
+    const likedMovies = ref([])
 
     const getUser = function () {
         if (!authStore.token) {
@@ -30,6 +31,20 @@ export const useUserStore = defineStore('user', () => {
             user.value = res.data
         })
         .catch((err) => console.log('Failed to fetch user data:', err))
+    }
+
+    // 좋아요 기능 구현
+    const likeMovies = function() {
+        axios ({
+            method:'post',
+            url:`${API_URL}/movies/:movie_id/likemovies`,
+            headers: {
+                Authorization: `Token ${authStore.token}`
+                }
+        })
+        .then((res)=> {
+            likedMovies.value = res.data
+        })
     }
 
 	return { user, isLike, isMovieLike, getUser }

@@ -33,6 +33,7 @@ class Movie(models.Model) :
     vote_average = models.FloatField(default=0.0)
     movie_like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='user_like_movies', blank=True)
     original_language = models.CharField(max_length=50, null=True)
+    
 
 
 

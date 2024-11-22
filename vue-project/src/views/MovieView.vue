@@ -28,7 +28,7 @@
     </div>
 
       <!-- 영화 목록 -->
-    <MovieList :movies="paginatedMovies" />
+    <!-- <MovieList :movies="paginatedMovies" /> -->
 
   </div>
 </template>
