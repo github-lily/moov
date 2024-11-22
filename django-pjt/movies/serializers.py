@@ -66,7 +66,7 @@ class MovieDetailSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
         
-class ArticleLikeListSerializer(serializers.ModelSerializer):
+class MovieLikeListSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('pk',)
