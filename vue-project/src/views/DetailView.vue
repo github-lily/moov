@@ -54,6 +54,12 @@ onMounted(() => {
       console.log(err)
     })
 })
+
+onMounted(() => {
+  store.getMovieDetail()
+  userStore.getUser()
+})
+
 </script>
 
 <style scoped>
