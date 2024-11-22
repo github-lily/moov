@@ -21,7 +21,7 @@
                 <a class="nav-link" href="#" @click="GoToLikeMovies">내가 찜한 리스트</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" >마이페이지</a>
+                <a class="nav-link" href="#"  @click="GoToMyPage">마이페이지</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#" >로그아웃</a>
@@ -55,6 +55,10 @@ const GoToHome = () => {
 
 const GoToLikeMovies =  () => {
   router.push({name:'LikeMoviesView'})
+}
+
+const GoToMyPage = () => {
+  router.push({name:'MyPage'})
 }
 </script>
 

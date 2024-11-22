@@ -58,6 +58,7 @@ const toggleLike = () => {
 
 // 영화 클릭 시 DetailView로 이동
 const goToDetail = (movie) => {
+  console.log('movie.id',props.movie.id)
   router.push({
     name:'DetailView', params:{id:props.movie.id}})
 }

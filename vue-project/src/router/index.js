@@ -9,6 +9,7 @@ import TestPreView from '@/views/TestPreView.vue'
 import TestView from '@/views/TestView.vue'
 import LikeMoviesView from '@/views/LikeMoviesView.vue'
 import MovieComment from '@/components/movie/MovieComment.vue'
+import MyPageView from '@/views/MyPageView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,6 +69,13 @@ const router = createRouter({
       name: 'MovieComment',
       component: MovieComment
     },
+    // 마이페이지
+    {
+      path: '/MyPage',
+      name: 'MyPage',
+      component: MyPageView
+    },
+    
 
   ]
 })
