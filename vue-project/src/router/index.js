@@ -71,11 +71,16 @@ const router = createRouter({
     },
     // 마이페이지
     {
-      path: '/MyPage',
+      path: '/MyPage/:username',
       name: 'MyPage',
       component: MyPageView
     },
-    
+    // 프로필 이미지 변경
+    // {
+    //   path: '/upload_img/:username',
+    //   name: 'profileImg',
+    //   component: ProfileImgChange
+    // },
 
   ]
 })
