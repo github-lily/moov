@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 import requests, json
 
 
-from .serializers import MovieDetailSerializer, MovieSerializer, CommentSerializer
+from .serializers import MovieDetailSerializer, MovieSerializer, CommentSerializer, MovieListSerializer
 from .models import Movie, Actor, Genre, Moviecomment
 from accounts.models import User
 
@@ -152,7 +152,6 @@ def getdatas():
 # getdatas()
 
 
-
 # 영화 목록 조회
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -225,12 +224,27 @@ def like_movies(request, movie_pk):
 
 User = get_user_model()
 
+# 특정 영화 좋아요
+@api_view(['POST'])
+def like_movie(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    user = request.user
+    if movie.movie_like_users.filter(pk=user.pk).exists():
+        movie.movie_like_users.remove(user)
+        serializer = MovieSerializer(movie)
+        return Response(serializer.data)
+    else:
+        movie.movie_like_users.add(user)
+        serializer = MovieSerializer(movie)
+        return Response(serializer.data)
+
+
 # 좋아요 누른 모든 영화 반환
 @api_view(['GET'])
 def like_movies_list(request, username):
     user = get_object_or_404(User, username=username)
     movies = user.user_like_movies.all()
-    serializer = MovieSerializer(movies, many=True)
+    serializer = MovieListSerializer(movies, many=True)
     return Response(serializer.data)
 
 
@@ -241,6 +255,6 @@ def like_movies_list(request, username):
 def user_commented_movies(request, username):
     user = get_object_or_404(User,username=username)
     comments = Moviecomment.objects.filter(user=request.user).select_related('movie')
-    movies = set(comment.movie for comment in comments)
+    movies = user.user_like_movies.all()
     serializer = MovieSerializer(movies, many=True)
     return Response(serializer.data)
