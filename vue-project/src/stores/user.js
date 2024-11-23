@@ -18,7 +18,7 @@ export const useUserStore = defineStore('user', () => {
         if (!authStore.token) {
             console.error('User is not authenticated: No token found')
             return
-          }
+        }
 
         axios({
             method: 'get',

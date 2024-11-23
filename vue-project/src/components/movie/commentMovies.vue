@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>좋아요 누른 영화 목록</p>
+    <p>댓글 단 영화 목록</p>
   </div>
 </template>
 
@@ -8,6 +8,6 @@
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
