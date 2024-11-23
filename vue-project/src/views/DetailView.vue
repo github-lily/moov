@@ -41,7 +41,7 @@
 
 <script setup>
 import axios from 'axios'
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 import HeaderNav from '@/components/common/HeaderNav.vue'
@@ -49,6 +49,7 @@ import MovieComment from '@/components/movie/MovieComment.vue'
 
 import { useAuthStore } from '@/stores/auth'
 import { useUserStore } from '@/stores/user'
+import { useMovieStore } from '@/stores/movie'
 
 const store = useMovieStore()
 const authStore = useAuthStore()
@@ -64,15 +65,26 @@ const movie = ref({
   overview: ''
 })
 
+
 const movieId = route.params.id
-console.log('Detail:movie',movie)
-console.log('Detail:movieId',movieId)
+
+// console.log('Detail movie =',movie) 38
+// console.log('Detail movieId = ',movieId) 38
 
 const moviePoster = computed(() => {
   return movie.value && movie.value.poster_path
     ? `https://image.tmdb.org/t/p/w500/${movie.value.poster_path}`
     : null
 })
+
+watch(
+  () => route.params.id,
+  (newId) => {
+    store.getMovieComments(newId) // 영화 ID 변경 시 댓글 업데이트
+  },
+  { immediate: true }
+)
+
 
 onMounted(() => {
   axios({
@@ -91,8 +103,8 @@ onMounted(() => {
 })
 
 onMounted(() => {
-  store.getMovieDetail()
-  // userStore.getUser()
+  store.getMovieDetail() // 영화 정보
+  store.getMovieComments(movieId) // 영화에 맞는 댓글 가져오기
 })
 
 </script>

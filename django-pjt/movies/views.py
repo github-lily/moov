@@ -176,14 +176,20 @@ def movie_detail(request, movie_pk):
 
 
 # 영화 댓글 생성
-@api_view(['POST'])
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def comment_create(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
-    serializer = CommentSerializer(data=request.data)
-    if serializer.is_valid(raise_exception=True):
-        serializer.save(movie=movie, user=request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    if request.method == 'GET':
+        comments = movie.comments.all()
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data)
+    
+    elif request.method == 'POST': 
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(movie=movie, user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
     
     
 # 영화 상세정보에서 댓글 조회, 삭제, 수정
