@@ -65,7 +65,7 @@ const user = computed(()=> {
   return userStore.user
 }) 
 
-console.log('comment', user.value)
+console.log('로그인한 유저 정보:', user.value)
 
 
 // 댓글 추가

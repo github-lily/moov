@@ -60,7 +60,7 @@ const authStore = useAuthStore()
 const router = useRouter()
 
 const {username} = storeToRefs(authStore)
-console.log(username.value, '좋아요로 넘길 값') //username 잘 나옴
+// console.log(username.value, '좋아요로 넘길 값') //username 잘 나옴
 
 
 const GoToHome = () => {

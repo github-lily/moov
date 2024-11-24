@@ -22,7 +22,7 @@ export const useUserStore = defineStore('user', () => {
 
         axios({
             method: 'get',
-            url: `${API_URL}/user/user`,
+            url: `${API_URL}/accounts/user`,
             headers: {
             Authorization: `Token ${authStore.token}`
             }

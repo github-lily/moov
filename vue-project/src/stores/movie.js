@@ -32,67 +32,121 @@ export const useMovieStore = defineStore('movie', () => {
       })
   }
 
-  // 영화 상세 정보를 받아오는 함수
 	const movie = ref(null)
-  
 	const route = useRoute()
+  
+  // 영화 상세 정보를 받아오는 함수
 	const getMovieDetail = function () {
     //console.log('route.params.id:', route.params.id) // 현재 경로 파라미터 id 확인 38
-	axios({
-		method: 'get',
-		url: `${API_URL}/api/v1/movies/${route.params.id}`,
-		headers: {
-		Authorization: `Token ${authStore.token}`
-	}
-	})
-		.then((res) => {
-			movie.value = res.data
-      console.log('movie 단일정보',movie.value)
-		})
-		.catch((err) => {
-			console.log(err)
-		})
-	}
-
-  // 영화 찾기
-  // const searchMovies = function(keyword) {
-  //   return axios({
-  //     method: 'get',
-  //     url: `${API_URL}/search/${keyword}/`,
-  //     headers: {
-  //       Authorization: `Token ${authStore.token}`
-  //     }
-  //   })
-  //     .then((res) => {
-  //       movies.value = res.data
-  //       return res.data
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //       return []
-  //     })
-  // }
-   // 댓글 리스트 요청
-  
-  const comments = ref([])
-
-  const getMovieComments = function (movieId) {
-    console.log('영화번호댓글:',movieId) //38잘 나옴
     axios({
       method: 'get',
-      url: `${API_URL}/api/v1/movies/${movieId}/comments/`,
+      url: `${API_URL}/api/v1/movies/${route.params.id}`,
       headers: {
         Authorization: `Token ${authStore.token}`
       }
     })
-      .then((res) => {
-        comments.value = res.data
-        console.log('해당 영화 댓글 조회:', comments.value)
+		.then((res) => {
+      movie.value = res.data
+      console.log('movie 단일정보',movie.value)
+		})
+		.catch((err) => {
+      console.log(err)
+		})
+	}
+  
+  // 영화 찾기
+  // const searchMovies = function(keyword) {
+    //   return axios({
+      //     method: 'get',
+      //     url: `${API_URL}/search/${keyword}/`,
+      //     headers: {
+        //       Authorization: `Token ${authStore.token}`
+        //     }
+        //   })
+        //     .then((res) => {
+          //       movies.value = res.data
+          //       return res.data
+          //     })
+          //     .catch((err) => {
+  //       console.log(err)
+  //       return []
+  //     })
+  // }
+  
+  
+  // 댓글 리스트 요청
+  
+  // const getMovieComments = function (movieId) {
+    //   console.log('영화번호댓글:',movieId) //38잘 나옴
+    //   axios({
+      //     method: 'get',
+      //     url: `${API_URL}/api/v1/movies/${movieId}/comments/`,
+      //     headers: {
+        //       Authorization: `Token ${authStore.token}`
+        //     }
+        //   })
+        //     .then((res) => {
+          //       comments.value = res.data
+          //       console.log('해당 영화 댓글 조회:', comments.value)
+          //     })
+          //     .catch((err) => {
+            //       console.log(err)
+            //     })
+            // }
+            const comments = ref([])
+            
+            // const getMovieComments = async function (movieId) {
+              //   try {
+                //     console.log('영화번호댓글:',movieId) //38잘 나옴
+                //     const response = await axios({
+                  //       method: 'get',
+  //       url: `${API_URL}/api/v1/movies/${movieId}/comments/`,
+  //       headers: {
+    //         Authorization: `Token ${authStore.token}`
+    //       }
+    //     })
+    //     comments.value = response.data
+    //     console.log('해당 영화 댓글 조회:', comments.value)
+    
+    //   } catch (err) {
+      //     console.error('Error fetching comments:', err)
+  //   }
+  // }
+
+  const lastFetchedMovieId = ref(null)  // 마지막으로 불러온 영화 ID 추적
+  const isLoading = ref(false) // 로딩 상태 
+
+  const getMovieComments = async function (movieId) {
+    // 이미 로딩 중이거나 같은 영화의 댓글을 불러왔다면 중복 호출 방지
+    if (isLoading.value || lastFetchedMovieId.value === movieId) {
+      console.log('Comments already loading or fetched for this movie')
+      return
+    }
+
+    try {
+      isLoading.value = true // 로딩 시작
+      
+      const response = await axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/movies/${movieId}/comments/`,
+        headers: {
+          Authorization: `Token ${authStore.token}`
+        }
       })
-      .catch((err) => {
-        console.log(err)
-      })
+      
+      comments.value = response.data
+      lastFetchedMovieId.value = movieId
+      console.log('댓글 목록:', comments.value)
+
+    } catch (err) {
+      console.error('Error fetching comments:', err)
+      comments.value = []
+      lastFetchedMovieId.value = null
+    } finally {
+      isLoading.value = false // 로딩 완료
+    }
   }
+
 
    // 댓글 작성
   const addComment = function (movieId, content) {

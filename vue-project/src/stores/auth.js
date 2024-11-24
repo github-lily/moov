@@ -80,7 +80,6 @@ export const useAuthStore = defineStore('auth', () => {
       token.value = null
       username.value=''
       router.push('/')
-      // router.push({name:'LogInView'})
     })
     .catch(err=>console.log(err))
   }

@@ -86,6 +86,7 @@ const router = createRouter({
     //   name: 'profileImg',
     //   component: ProfileImgChange
     // },
+    
     //영화 검색 페이지
     {
       path: '/search/:keyword',
