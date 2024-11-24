@@ -22,10 +22,11 @@ export const useUserStore = defineStore('user', () => {
 
         axios({
             method: 'get',
-            url: `${API_URL}/accounts/user`,
+            url: `${API_URL}/user/user`,
             headers: {
             Authorization: `Token ${authStore.token}`
             }
+        
         })
         .then((res) => {
             user.value = res.data

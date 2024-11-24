@@ -22,7 +22,7 @@ urlpatterns = [
     # 메인페이지로 가는 url
     path('api/v1/', include('movies.urls')),
     # mypage용 accounts url
-    path('accounts/', include('accounts.urls')),
+    path('user/', include('accounts.urls')),
     # 권한 관련 url
     path('accounts/', include('dj_rest_auth.urls')),
     path('accounts/signup/', include('dj_rest_auth.registration.urls')),
