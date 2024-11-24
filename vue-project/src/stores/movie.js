@@ -33,9 +33,9 @@ export const useMovieStore = defineStore('movie', () => {
   }
 
   // 영화 상세 정보를 받아오는 함수
-	const route = useRoute()
 	const movie = ref(null)
-
+  
+	const route = useRoute()
 	const getMovieDetail = function () {
     //console.log('route.params.id:', route.params.id) // 현재 경로 파라미터 id 확인 38
 	axios({
@@ -54,6 +54,24 @@ export const useMovieStore = defineStore('movie', () => {
 		})
 	}
 
+  // 영화 찾기
+  // const searchMovies = function(keyword) {
+  //   return axios({
+  //     method: 'get',
+  //     url: `${API_URL}/search/${keyword}/`,
+  //     headers: {
+  //       Authorization: `Token ${authStore.token}`
+  //     }
+  //   })
+  //     .then((res) => {
+  //       movies.value = res.data
+  //       return res.data
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //       return []
+  //     })
+  // }
    // 댓글 리스트 요청
   const comments = ref([])
 
@@ -115,5 +133,5 @@ export const useMovieStore = defineStore('movie', () => {
   }
 
 
-  return { movies, API_URL, getMovies, getMovieDetail, comments, getMovieComments, addComment, deleteComment}
+  return { movies, API_URL, getMovies, getMovieDetail, comments, getMovieComments, addComment, deleteComment,}
 }, { persist: true })

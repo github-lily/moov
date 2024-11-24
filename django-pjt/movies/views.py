@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.conf import settings
 from django.contrib.auth import get_user_model
 import requests, json
-
+import os
 
 from .serializers import MovieDetailSerializer, MovieSerializer, CommentSerializer
 from .models import Movie, Actor, Genre, Moviecomment
@@ -242,11 +242,36 @@ def like_movies_list(request, username):
 
 
 # 사용자가 댓글 단 영화 목록 조회
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def user_commented_movies(request, username):
+#     user = get_object_or_404(User,username=username)
+#     comments = Moviecomment.objects.filter(user=request.user).select_related('movie')
+#     movies = set(comment.movie for comment in comments)
+#     serializer = MovieSerializer(movies, many=True)
+#     return Response(serializer.data)
+
+
+# 사용자가 댓글 단 영화 목록 조회(민정 다시)
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def user_commented_movies(request, username):
-    user = get_object_or_404(User,username=username)
-    comments = Moviecomment.objects.filter(user=request.user).select_related('movie')
-    movies = set(comment.movie for comment in comments)
+    user = get_object_or_404(User, username=username)
+    # username에 해당하는 사용자가 작성한 댓글들
+    comments = Moviecomment.objects.filter(user=user)
+    # 댓글이 있는 영화들의 목록 (중복 제거)
+    movies = Movie.objects.filter(comments__in=comments).distinct()
     serializer = MovieSerializer(movies, many=True)
     return Response(serializer.data)
+
+# 민 다시다시
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def user_commented_movies(request):
+#     user = request.user
+#     # 해당 사용자가 작성한 댓글들
+#     comments = Moviecomment.objects.filter(user=user)
+#     # 댓글이 달린 영화 목록
+#     movies = Movie.objects.filter(comments__in=comments).distinct()
+#     serializer = MovieSerializer(movies, many=True)
+#     return Response(serializer.data)

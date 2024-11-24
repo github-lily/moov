@@ -10,6 +10,7 @@ import TestView from '@/views/TestView.vue'
 import LikeMoviesView from '@/views/LikeMoviesView.vue'
 import MovieComment from '@/components/movie/MovieComment.vue'
 import MyPageView from '@/views/MyPageView.vue'
+import SearchResult from '@/components/movie/SearchResult.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -75,7 +76,12 @@ const router = createRouter({
       name: 'MyPage',
       component: MyPageView
     },
-    
+    //영화 검색 페이지
+    {
+      path: '/search/:keyword',
+      name: 'SearchResults',
+      component: SearchResult
+    }
 
   ]
 })
