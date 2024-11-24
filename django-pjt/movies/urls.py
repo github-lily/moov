@@ -19,10 +19,10 @@ urlpatterns = [
     path('movies/<str:username>/comments/', views.user_commented_movies),
 
     
-    # 영화 좋아요 누른 사람 조회
+    # 영화 좋아요
     path('movies/<int:movie_pk>/likemovies', views.like_movies),
     # 좋아요 누른 영화 목록 조회
-    path('mypage/<str:username>/like_movies_list/', views.like_movies_list, name='like_movies_list'),
+    path('mypage/<str:username>/likemovieslist/', views.like_movies_list, name='like_movies_list'),
 
 
 
