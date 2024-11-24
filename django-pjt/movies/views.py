@@ -167,7 +167,6 @@ def movie_list(request):
 @permission_classes([IsAuthenticated])
 def movie_detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
-    # if request.method == 'GET':
     serializer = MovieSerializer(movie)
     return Response(serializer.data)
 
@@ -189,6 +188,7 @@ def comment_create(request, movie_pk):
         if serializer.is_valid(raise_exception=True):
             serializer.save(movie=movie, user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     
 # 영화 상세정보에서 댓글 조회, 삭제, 수정
@@ -247,8 +247,8 @@ def like_movie(request, movie_pk):
 
 # 좋아요 누른 모든 영화 반환
 @api_view(['GET'])
-def like_movies_list(request, username):
-    user = get_object_or_404(User, username=username)
+def like_movies_list(request, user_id):
+    user = get_object_or_404(User, id=user_id)
     movies = user.user_like_movies.all()
     serializer = MovieListSerializer(movies, many=True)
     return Response(serializer.data)
