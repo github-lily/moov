@@ -51,6 +51,7 @@ import { useAuthStore } from '@/stores/auth'
 import { useUserStore } from '@/stores/user'
 import { useMovieStore } from '@/stores/movie'
 
+
 const store = useMovieStore()
 const authStore = useAuthStore()
 const userStore = useUserStore()
@@ -106,6 +107,8 @@ onMounted(() => {
   store.getMovieDetail() // 영화 정보
   store.getMovieComments(movieId) // 영화에 맞는 댓글 가져오기
 })
+
+
 
 </script>
 

@@ -18,7 +18,7 @@
                 <a class="nav-link" aria-current="page" href="#" @click="GoToHome" >홈</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" @click="GoToLikeMovies">내가 찜한 리스트</a>
+                <a class="nav-link" href="#" @click="GoToLikeMovies(username)">내가 찜한 리스트</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#"  @click="GoToMyPage">마이페이지</a>
@@ -49,19 +49,30 @@ import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { useMovieStore } from '@/stores/movie';
 import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
 import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router';
+import { useUserStore } from '@/stores/user';
+
+
 
 const movieStore = useMovieStore()
 const authStore = useAuthStore()
 const router = useRouter()
+
+const {username} = storeToRefs(authStore)
+console.log(username.value, '좋아요로 넘길 값') //username 잘 나옴
 
 
 const GoToHome = () => {
   router.push({name:'MovieView'})
 }
 
-const GoToLikeMovies =  () => {
-  router.push({name:'LikeMoviesView'})
+
+const GoToLikeMovies = () => {
+  router.push({ 
+    name: 'LikeMoviesView',
+    params: { username: username.value }
+  })
 }
 
 const GoToMyPage = () => {
@@ -112,10 +123,11 @@ const handleSearch = async () => {
   }
 }
 
+}
+// 나중에 하자
 // onBeforeRouteUpdate((to, from) => {
 
 //   })
-}
 
 </script>
 
