@@ -1,7 +1,7 @@
 <template>
   <div class="movie-grid">
       <MovieListItem 
-      v-for="movie in store.movies"
+      v-for="movie in props.movies"
         :key="movie.id"
         :movie="movie"
       />
