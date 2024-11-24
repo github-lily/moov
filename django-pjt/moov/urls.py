@@ -26,4 +26,6 @@ urlpatterns = [
     # 권한 관련 url
     path('accounts/', include('dj_rest_auth.urls')),
     path('accounts/signup/', include('dj_rest_auth.registration.urls')),
+    # chat gpt 관련 url
+    path('api/chat/', include('chat.urls')),
 ]
