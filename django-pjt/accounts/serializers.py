@@ -4,18 +4,19 @@ from movies.models import Movie
 # from .models import Comment
 from movies.serializers import MovieSerializer
 
+
 User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
 
-    class MovieSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = Movie
-            fields = '__all__'
+    # class MovieSerializer(serializers.ModelSerializer):
+    #     class Meta:
+    #         model = Movie
+    #         fields = '__all__'
 
-    # 찜한 영화 
-    like_movies = MovieSerializer(source='user_like_movies', many=True, read_only=True)
+    # # 찜한 영화 
+    # like_movies = MovieSerializer(source='user_like_movies', many=True, read_only=True)
 
     class Meta:
         model = User
