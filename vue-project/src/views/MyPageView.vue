@@ -95,6 +95,10 @@ onMounted(() => {
   align-items: center;
 }
 
+img {
+  width: 100%;
+}
+
 .hello {
   font-size:2em;
   font-family: 'Noto Sans KR';

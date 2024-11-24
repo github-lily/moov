@@ -30,8 +30,9 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, watch } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+
 
 
 const router = useRouter()
@@ -59,7 +60,7 @@ const toggleLike = () => {
 
 // 영화 클릭 시 DetailView로 이동
 const goToDetail = (movie) => {
-  console.log('movie.id는 모냐',props.movie.id)
+  console.log('movie.id는 뭐냐면',props.movie.id)
 
   router.push({
     name:'DetailView', params:{id:props.movie.id}}) // params를 하면 router에 :id로 등록해줘야함
