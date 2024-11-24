@@ -73,6 +73,7 @@ export const useMovieStore = defineStore('movie', () => {
   //     })
   // }
    // 댓글 리스트 요청
+  
   const comments = ref([])
 
   const getMovieComments = function (movieId) {
@@ -116,10 +117,10 @@ export const useMovieStore = defineStore('movie', () => {
   }
 
    // 댓글 삭제
-  const deleteComment = function (commentId) {
+  const deleteComment = function (commentId, movieId) {
     axios({
       method: 'delete',
-      url: `${API_URL}/api/v1/comments/${commentId}/`,
+      url: `${API_URL}/api/v1/movies/${movieId}/comments/${commentId}`,
       headers: {
         Authorization: `Token ${authStore.token}`
       }

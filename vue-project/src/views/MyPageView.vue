@@ -6,7 +6,7 @@
       <div class="profile-container">
         <p class="hello">안녕하세요. {{ username }}님!</p>
         <div class="img-box">
-          <img src="#" alt="프로필 이미지">
+          <img src="@/assets/profile.png" alt="프로필 이미지">
         </div>
         <p class="level">{{ username }}님의 level</p>
       </div>

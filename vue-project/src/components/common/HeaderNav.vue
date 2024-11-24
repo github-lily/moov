@@ -27,21 +27,13 @@
                 <a class="nav-link" href="#" @click="handleLogout">로그아웃</a>
               </li>
             </ul>
-
-            <!-- 검색 창 -->
-            <form class="d-flex" role="search">
-              <input class="movieSearch" placeholder="영화를 검색해보세요!">
-              <button class="btn" type="submit">
-                <i class="fas fa-search"></i>
-              </button>
-            </form>
-
-            <!-- <form class="d-flex" role="search" @submit.prevent="handleSearch">
+            <!-- 검색창 -->
+            <form class="d-flex" role="search" @submit.prevent="handleSearch">
               <input class="movieSearch" placeholder="영화를 검색해보세요!" v-model="searchKeyword">
               <button class="btn" type="submit">
                 <i class="fas fa-search"></i>
               </button>
-            </form> -->
+            </form>
             
           </div>
 
@@ -56,12 +48,13 @@
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { useMovieStore } from '@/stores/movie';
+import { ref } from 'vue';
+import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router';
 
 const movieStore = useMovieStore()
 const authStore = useAuthStore()
 const router = useRouter()
 
-// const searchKeyword = ref('')
 
 const GoToHome = () => {
   router.push({name:'MovieView'})
@@ -79,21 +72,50 @@ const handleLogout = () => {
   authStore.logOut()
 }
 
-// 검색으로 영화 찾기
-// const handleSearch = async () => {
-//   if (searchKeyword.value.trim()) {
-//     try {
-//       await movieStore.searchMovies(searchKeyword.value)
-//       // 검색 결과를 보여줄 페이지로 이동
-//       router.push({
-//         name: 'SearchResults',
-//         params: { keyword: searchKeyword.value }
-//       })
-//     } catch (error) {
-//       console.error('Search failed:', error)
-//     }
-//   }
-// }
+          
+const searchKeyword = ref(null)
+const movies = ref([])
+
+
+const handleSearch = async () => {
+  // console.log('검색키워드:', searchKeyword.value) //잘 나옴
+  movieStore.getMovies();
+  movies.value = movieStore.movies;
+  
+  // 만약 사용자가 검색을 했다면
+  if (searchKeyword.value) {
+    
+
+    // 새로고침 오류 해결 
+    if (searchKeyword.value) {
+
+
+    // // 먼저 영화 데이터를 가져옵니다
+    // await movieStore.getMovies()
+    
+    // // 검색 결과 페이지로 이동
+    // await router.push({
+    //   name: 'SearchResults',
+    //   params: { keyword: searchKeyword.value }
+    // })
+
+    // // 검색 후 입력창 초기화
+    // searchKeyword.value = ''
+
+    // 새로고침해야하는 코드
+    router.push({
+      name: 'SearchResults',
+      params: { keyword: searchKeyword.value }
+    })
+
+
+  }
+}
+
+// onBeforeRouteUpdate((to, from) => {
+
+//   })
+}
 
 </script>
 

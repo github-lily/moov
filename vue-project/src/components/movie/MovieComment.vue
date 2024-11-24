@@ -1,3 +1,5 @@
+<!-- 디테일 뷰 해당 영화 댓글 -->
+
 <template>
   <div class="comments-section">
     <div class="comments-create">
@@ -11,7 +13,7 @@
         <p class="single-comment" style="color: white;" ><strong>{{ comment.username }}님</strong>: {{ comment.content }}</p>
         <div v-if="user.username === comment.username">
           <!-- <button @click="editComment(comment)">Edit</button> -->
-          <button class="delete-button" @click="deleteComment(comment.id)">Delete</button>
+          <button class="delete-button" @click="deleteComment(comment.id, movieId)">Delete</button>
         </div>
       </li>
 
@@ -75,15 +77,15 @@ const addComment = async () => {
 }
 
 //댓글 삭제하기
-// const deleteComment = async (commentId) => {
-//   try {
-//     await movieStore.deleteComment(commentId)
-//     await fetchComments() // 댓글 목록 새로고침
-//     comments.value = movieStore.comments
-//   } catch (error) {
-//     console.error(error)
-//   }
-// }
+const deleteComment = async (commentId, movieId ) => {
+  try {
+    await movieStore.deleteComment(commentId, movieId)
+    await fetchComments() // 댓글 목록 새로고침
+    comments.value = movieStore.comments
+  } catch (error) {
+    console.error('댓글 삭제 실패:', error)
+  }
+}
 
 
 // 초기 데이터 로드

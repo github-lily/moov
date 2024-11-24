@@ -1,3 +1,5 @@
+<!-- 로그인한 사용자의 댓글 -->
+
 <template>
   <div class="commented-movies">
     <div v-if="loading" class="text-center p-4">
