@@ -18,7 +18,12 @@
         </div>
         <div class="my-comments components">
           <p class="favorite">My Comments</p>
-          <commentMovies/>
+          <div v-if="commentmovies.length > 0">
+            <MovieList :movies="commentmovies"/>
+          </div>
+          <div v-else>
+            <p class="no-comment">댓글을 작성해보세요!</p>
+          </div>
         </div>
       </div>
     </div>
@@ -32,13 +37,39 @@ import { useUserStore } from '@/stores/user';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '@/stores/auth';
 import LikeMovies from '@/components/movie/LikeMovies.vue';
-import commentMovies from '@/components/movie/commentMovies.vue';
+import MovieList from '@/components/movie/MovieList.vue';
+import { useMovieStore } from '@/stores/movie';
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 
 const userStore = useAuthStore()
-
 const {username} = storeToRefs(userStore)
 console.log(username.value, '님의 마이페이지')
 
+const store = useMovieStore()
+
+//로그인 사용자가 작성한 댓글들의 전체 영화목록
+const commentmovies = ref([])
+const API_URL = 'http://127.0.0.1:8000';
+
+onMounted(() => {
+  if (username.value) {
+    axios({
+      method: 'get',
+      url: `${API_URL}/api/v1/movies/${username.value}/comments/`,
+      headers: {
+        Authorization: `Token ${userStore.token}`,
+      },
+    })
+      .then((response) => {
+        commentmovies.value = response.data; // 반환된 영화 목록
+        console.log('사용자가 댓글 단 영화 목록:',commentmovies.value)
+      })
+      .catch((error) => {
+        console.error('댓글 영화 목록 가져오기 실패:', error);
+      });
+  }
+});
 
 </script>
 
@@ -102,5 +133,10 @@ console.log(username.value, '님의 마이페이지')
   color: white;
   font-size: 2em;
   font-family: 'Krona One';
+}
+
+.no-comment {
+  font-family: 'Noto Sans KR';
+  color: rgb(202, 202, 202);
 }
 </style>

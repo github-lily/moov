@@ -7,6 +7,8 @@ from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from .serializers import UserSerializer, UserImgSerializer
 from movies.serializers import MovieSerializer
+from rest_framework.authentication import TokenAuthentication, BasicAuthentication
+
 # from .models import Comment, Profile
 
 

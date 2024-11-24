@@ -2,16 +2,19 @@
   <div class="comments-section">
     <div class="comments-create">
       <textarea v-model="newComment" placeholder="  댓글을 달아보세요!"></textarea>
-      <button @click="addComment">등록</button>
+      <button class="register-button" @click="addComment">등록</button>
     </div>
+
     <ul>
-      <li v-for="comment in comments" :key="comment.id">
-        <p style="color: white;" ><strong>{{ comment.username }}</strong>: {{ comment.content }}</p>
-        <!-- <div v-if="user.username === comment.username">
-          <button @click="editComment(comment)">Edit</button>
-          <button @click="deleteComment(comment.id)">Delete</button>
-        </div> -->
+
+      <li v-for="comment in comments" :key="comment.id" class="comments-box">
+        <p class="single-comment" style="color: white;" ><strong>{{ comment.username }}님</strong>: {{ comment.content }}</p>
+        <div v-if="user.username === comment.username">
+          <!-- <button @click="editComment(comment)">Edit</button> -->
+          <button class="delete-button" @click="deleteComment(comment.id)">Delete</button>
+        </div>
       </li>
+
     </ul>
   </div>
 </template>
@@ -60,7 +63,7 @@ const user = computed(()=> {
   return userStore.user
 }) 
 
-console.log('comment', user)
+console.log('comment', user.value)
 
 
 // 댓글 추가
@@ -86,6 +89,9 @@ const addComment = async () => {
 // 초기 데이터 로드
 onMounted(() => {
   if (props.movieId) fetchComments()
+  if (authStore.token) {
+    userStore.getUser(); 
+  }
 })
 
 
@@ -106,7 +112,7 @@ textarea {
   font-size: 16px;
   /* border-radius: 5px; */
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 2px solid #ccc;
   background-color: transparent;
   display: block;
   box-sizing: border-box;
@@ -122,14 +128,37 @@ textarea::placeholder {
 textarea:focus {
   border: none;
   outline: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 3.5px solid #ccc;
 }
 
-button {
+.register-button {
   width: 10%;
   font-family: 'Noto Sans KR';
   border: none;
   border-radius: 50px;
   background-color: #fff;
+}
+
+.comments-box {
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-between; /* 댓글 내용과 삭제 버튼을 양 끝에 배치 */
+  align-items: center; /* 세로 정렬 */
+  padding: 10px 0;
+  border-bottom: 1px solid rgb(146, 146, 146);
+}
+
+.single-comment {
+  flex: 1; 
+  margin-bottom: 0;
+}
+
+.delete-button {
+  width: 100%;
+  font-family: 'Noto Sans KR';
+  border: none;
+  background-color: transparent;
+  color: #ccc;
+  cursor: pointer; /* 마우스 커서 변경 */
 }
 </style>

@@ -24,7 +24,7 @@
                 <a class="nav-link" href="#"  @click="GoToMyPage">마이페이지</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" >로그아웃</a>
+                <a class="nav-link" href="#" @click="handleLogout">로그아웃</a>
               </li>
             </ul>
 
@@ -35,6 +35,14 @@
                 <i class="fas fa-search"></i>
               </button>
             </form>
+
+            <!-- <form class="d-flex" role="search" @submit.prevent="handleSearch">
+              <input class="movieSearch" placeholder="영화를 검색해보세요!" v-model="searchKeyword">
+              <button class="btn" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </form> -->
+            
           </div>
 
         </div>
@@ -46,8 +54,14 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
+import { useMovieStore } from '@/stores/movie';
 
+const movieStore = useMovieStore()
+const authStore = useAuthStore()
 const router = useRouter()
+
+// const searchKeyword = ref('')
 
 const GoToHome = () => {
   router.push({name:'MovieView'})
@@ -60,6 +74,27 @@ const GoToLikeMovies =  () => {
 const GoToMyPage = () => {
   router.push({name:'MyPage'})
 }
+
+const handleLogout = () => {
+  authStore.logOut()
+}
+
+// 검색으로 영화 찾기
+// const handleSearch = async () => {
+//   if (searchKeyword.value.trim()) {
+//     try {
+//       await movieStore.searchMovies(searchKeyword.value)
+//       // 검색 결과를 보여줄 페이지로 이동
+//       router.push({
+//         name: 'SearchResults',
+//         params: { keyword: searchKeyword.value }
+//       })
+//     } catch (error) {
+//       console.error('Search failed:', error)
+//     }
+//   }
+// }
+
 </script>
 
 <style scoped>
