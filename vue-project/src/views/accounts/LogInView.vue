@@ -3,9 +3,9 @@
     <h1>MOOV.</h1>
     <form class="form" @submit.prevent="logIn">
       <p>사용자 이름 </p>
-      <input type="text" id="username" v-model.trim="username"  placeholder="   이름을 입력하세요.">
+      <input type="text" id="username" v-model.trim="username"  placeholder="이름을 입력하세요.">
       <p>비밀번호 </p>
-      <input class="secondinput" type="password" id="password" v-model.trim="password" placeholder="   비밀번호를 입력하세요.">
+      <input class="secondinput" type="password" id="password" v-model.trim="password" placeholder="비밀번호를 입력하세요.">
       <!-- <input type="submit" value="Log In" > -->
       <div>
         <button class="btn btn-primary" type="submit">Log In</button>
@@ -86,6 +86,7 @@ input {
   height: 40px;
   margin-bottom: 10px;
   border-radius: 50px;
+  padding-left: 20px;
 }
 
 .secondinput {
