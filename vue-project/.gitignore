@@ -1,6 +1,7 @@
 # Python 캐시 파일
 *.pyc
 __pycache__/
+.env.local
 
 # 가상 환경 폴더
 venv/
