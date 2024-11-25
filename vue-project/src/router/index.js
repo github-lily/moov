@@ -10,8 +10,11 @@ import TestView from '@/views/TestView.vue'
 import LikeMoviesView from '@/views/LikeMoviesView.vue'
 import MovieComment from '@/components/movie/MovieComment.vue'
 import MyPageView from '@/views/MyPageView.vue'
+import SearchResult from '@/components/movie/SearchResult.vue'
 
 const router = createRouter({
+
+  
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     // 첫 화면
@@ -59,10 +62,12 @@ const router = createRouter({
     },
     // 좋아요한 페이지 목록
     {
-      path: '/likeMovies',
+      path: '/mypage/:username/likemovieslist/',
       name: 'LikeMoviesView',
-      component: LikeMoviesView
+      component: LikeMoviesView, 
+      props:true
     },
+
     // 사용자가 댓글 단 영화 목록
     {
       path: '/movies/:username/comments',
@@ -71,11 +76,26 @@ const router = createRouter({
     },
     // 마이페이지
     {
-      path: '/MyPage',
+      path: '/MyPage/',
       name: 'MyPage',
       component: MyPageView
     },
+    // 프로필 이미지 변경
+    // {
+    //   path: '/upload_img/:username',
+    //   name: 'profileImg',
+    //   component: ProfileImgChange
+    // },
+<<<<<<< HEAD
+=======
     
+>>>>>>> 24029fa6bd8c673291a8382d18501212edceba80
+    //영화 검색 페이지
+    {
+      path: '/search/:keyword',
+      name: 'SearchResults',
+      component: SearchResult
+    }
 
   ]
 })

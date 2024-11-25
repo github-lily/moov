@@ -3,18 +3,25 @@ from rest_framework.decorators import api_view, permission_classes
 
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.contrib.auth import get_user_model
+from django.http import JsonResponse
 
 from rest_framework.response import Response
 from .serializers import UserSerializer, UserImgSerializer
 from movies.serializers import MovieSerializer
+from rest_framework.authentication import TokenAuthentication, BasicAuthentication
+
+
+from movies.serializers import MovieSerializer
+from movies.models import Movie
+
 # from .models import Comment, Profile
 
 
 
 # 이미지 업로드
 @api_view(['GET', 'PUT'])
-def upload_img(request, username):
-    user = get_object_or_404(get_user_model(), username=username)
+def upload_img(request, user_id):
+    user = get_object_or_404(get_user_model(), username=user_id)
 
     # 프로필 사진 조회
     if request.method == 'GET':
@@ -34,11 +41,15 @@ def upload_img(request, username):
 
 # 프로필 페이지 조회
 @api_view(['GET'])
-def user_profile(request, username):
-    user = get_object_or_404(get_user_model(), username=username)
+def user_profile(request, user_id):
+    user = get_object_or_404(get_user_model(), id=user_id)
     if request.method == 'GET':
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
+        user_serializer = UserSerializer(user)
+        # data = {
+        #     'user' : user_serializer.data,
+        # }
+        return Response(user_serializer.data)
+    
     
 
 

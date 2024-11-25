@@ -2,7 +2,7 @@
   <div class="texts">
     <p class="welcome">Welcome to</p>
     <h1>MOOV.</h1>
-    <p class="contexts">반갑습니다. 김민정님! <br> 김민정님에게 맞는 영화를 추천해드릴게요!</p>
+    <p class="contexts">반갑습니다. {{username}} 님! <br> {{username}}님에게 맞는 영화를 추천해드릴게요!</p>
   </div>
 
   <button class="arrow-button" @click="goToTestView">&#8594;</button>
@@ -10,8 +10,16 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
+import { storeToRefs } from 'pinia';
 
+const store = useAuthStore()
+
+// storeToRefs로 반응형 상태 추출
+const {username} = storeToRefs(store)
 const router = useRouter()
+
+// console.log(username.value)
 
 const goToTestView = () => {
   router.push({name: 'TestView'})

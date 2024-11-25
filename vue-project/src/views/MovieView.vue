@@ -23,8 +23,9 @@
           :key="genre.id" :value="genre.name">{{ genre.name }}</option>
         </select>
       </div>
+
       <!-- 영화 12개만 출력 -->
-      <MovieList :movies="filteredMovies.slice(0,12)"/>
+      <MovieList :movies="movies"/>
     </div>
 
       <!-- 영화 목록 -->
@@ -39,6 +40,13 @@ import MovieList from '@/components/movie/MovieList.vue';
 import { useMovieStore } from '@/stores/movie'
 import HeaderNav from '@/components/common/HeaderNav.vue';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
+import { storeToRefs } from 'pinia';
+
+const usestore = useAuthStore()
+const {username} = storeToRefs(usestore)
+console.log(username.value, '님의 메인페이지')
+
 
 const router = useRouter()
 const store = useMovieStore()
@@ -48,6 +56,13 @@ const goToTest = () => {
   router.push({name:'TestView'})
 }
 
+onMounted(() => {
+  store.getMovies();
+  movies.value = store.movies;
+})
+
+
+//-------------------------------------------------장르관련-----------------------------------
 
 // // 장르별 필터
 // const filteredMovies = computed(() => {
@@ -58,17 +73,6 @@ const goToTest = () => {
 // })
 
 
-onMounted(() => {
-  // mount 되기전에 store에 있는 전체 게시글 요청 함수를 호출
-  // console.log('before getmovies')
-  
-   store.getMovies()
-  movies.value = store.movies;
-  
-  // console.log(store.movies)
-  // console.log('end of getmovies')
-
-})
 
 // 영화 장르 (id와 name이 매칭된 형태로 저장)
 const genres = ref([
@@ -94,18 +98,19 @@ const genres = ref([
 ])
 const selectedGenre = ref("")
 
+// console.log('movie:', store.movies[0].genres)
 console.log('movie:', store.movies)
 
 // 장르별 필터
-const filteredMovies = computed(() => {
-  if (!selectedGenre.value) {
-    return store.movies.value || [];
-  }
+// const filteredMovies = computed(() => {
+//   if (!selectedGenre.value) {
+//     return store.movies.value || [];
+//   }
   
-  return (store.movies.value || []).filter(movie => 
-    movie.genre && movie.genre.includes(selectedGenre.value)
-  );
-});
+//   return (store.movies.value || []).filter(movie => 
+//     movie.genre && movie.genre.includes(selectedGenre.value)
+//   );
+// });
 // const filteredMovies = computed(()=> {
 //   return store.movies.filter(function(movie) {
 //     console.log('movieGenre:', movie.genres)

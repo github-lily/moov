@@ -41,15 +41,16 @@
 
 <script setup>
 import axios from 'axios'
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 import HeaderNav from '@/components/common/HeaderNav.vue'
 import MovieComment from '@/components/movie/MovieComment.vue'
 
-import { useMovieStore } from '@/stores/movie'
 import { useAuthStore } from '@/stores/auth'
 import { useUserStore } from '@/stores/user'
+import { useMovieStore } from '@/stores/movie'
+
 
 const store = useMovieStore()
 const authStore = useAuthStore()
@@ -65,9 +66,11 @@ const movie = ref({
   overview: ''
 })
 
+
 const movieId = route.params.id
-console.log('Detail:movie',movie)
-console.log('Detail:movieId',movieId)
+
+// console.log('Detail movie =',movie) 38
+// console.log('Detail movieId = ',movieId) 38
 
 const moviePoster = computed(() => {
   return movie.value && movie.value.poster_path
@@ -75,25 +78,83 @@ const moviePoster = computed(() => {
     : null
 })
 
-onMounted(() => {
-  axios({
-    method: 'get',
-    url: `${store.API_URL}/api/v1/movies/${route.params.id}/`,
-    headers: {
-      Authorization: `Token ${authStore.token}`
+// watch 때문에 다중호출되는듯
+// watch(
+//   () => route.params.id,
+//   (newId) => {
+//     store.getMovieComments(newId) // 영화 ID 변경 시 댓글 업데이트
+//   },
+//   { immediate: true }
+// )
+
+
+// onMounted(() => {
+//   axios({
+//     method: 'get',
+//     url: `${store.API_URL}/api/v1/movies/${route.params.id}/`,
+//     headers: {
+//       Authorization: `Token ${authStore.token}`
+//     }
+//   })
+//     .then((res) => {
+//       movie.value = res.data
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//     })
+// })
+
+// onMounted(() => {
+//   store.getMovieDetail() // 영화 정보
+//   store.getMovieComments(movieId) // 영화에 맞는 댓글 가져오기
+// })
+
+
+// // 위에꺼 onMounted 통합
+// onMounted(async () => {
+//   try {
+//     // 영화 상세 정보 가져오기
+//     const response = await axios({
+//       method: 'get',
+//       url: `${store.API_URL}/api/v1/movies/${movieId}/`,
+//       headers: {
+//         Authorization: `Token ${authStore.token}`
+//       }
+//     })
+//     movie.value = response.data
+    
+//     // 댓글 정보 가져오기
+//     await store.getMovieComments(movieId)
+//   } catch (err) {
+//     console.error('Error fetching movie details:', err)
+//   }
+// })
+
+
+// 단일 비동기 함수로 다시 통합
+const fetchMovieData = async () => {
+  try {
+    // 영화 상세 정보 가져오기
+    const response = await axios({
+      method: 'get',
+      url: `${store.API_URL}/api/v1/movies/${movieId}/`,
+      headers: {
+        Authorization: `Token ${authStore.token}`
+      }
+    })
+    movie.value = response.data
+    
+    // 댓글 정보는 한 번만 가져오기
+    if (!store.comments.length || store.comments[0]?.movieId !== movieId) {
+      await store.getMovieComments(movieId)
     }
-  })
-    .then((res) => {
-      movie.value = res.data
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-})
+  } catch (err) {
+    console.error('Error fetching movie details:', err)
+  }
+}
 
 onMounted(() => {
-  store.getMovieDetail()
-  // userStore.getUser()
+  fetchMovieData()
 })
 
 </script>

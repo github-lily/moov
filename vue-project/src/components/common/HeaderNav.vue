@@ -18,23 +18,23 @@
                 <a class="nav-link" aria-current="page" href="#" @click="GoToHome" >홈</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" @click="GoToLikeMovies">내가 찜한 리스트</a>
+                <a class="nav-link" href="#" @click="GoToLikeMovies(username)">내가 찜한 리스트</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#"  @click="GoToMyPage">마이페이지</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" >로그아웃</a>
+                <a class="nav-link" href="#" @click="handleLogout">로그아웃</a>
               </li>
             </ul>
-
-            <!-- 검색 창 -->
-            <form class="d-flex" role="search">
-              <input class="movieSearch" placeholder="영화를 검색해보세요!">
+            <!-- 검색창 -->
+            <form class="d-flex" role="search" @submit.prevent="handleSearch">
+              <input class="movieSearch" placeholder="영화를 검색해보세요!" v-model="searchKeyword">
               <button class="btn" type="submit">
                 <i class="fas fa-search"></i>
               </button>
             </form>
+            
           </div>
 
         </div>
@@ -46,20 +46,93 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
+import { useMovieStore } from '@/stores/movie';
+import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router';
+import { useUserStore } from '@/stores/user';
 
+
+
+const movieStore = useMovieStore()
+const authStore = useAuthStore()
 const router = useRouter()
+
+const {username} = storeToRefs(authStore)
+<<<<<<< HEAD
+console.log(username.value, '좋아요로 넘길 값') //username 잘 나옴
+=======
+// console.log(username.value, '좋아요로 넘길 값') //username 잘 나옴
+>>>>>>> 24029fa6bd8c673291a8382d18501212edceba80
+
 
 const GoToHome = () => {
   router.push({name:'MovieView'})
 }
 
-const GoToLikeMovies =  () => {
-  router.push({name:'LikeMoviesView'})
+
+const GoToLikeMovies = () => {
+  router.push({ 
+    name: 'LikeMoviesView',
+    params: { username: username.value }
+  })
 }
 
 const GoToMyPage = () => {
   router.push({name:'MyPage'})
 }
+
+const handleLogout = () => {
+  authStore.logOut()
+}
+
+          
+const searchKeyword = ref(null)
+const movies = ref([])
+
+
+const handleSearch = async () => {
+  // console.log('검색키워드:', searchKeyword.value) //잘 나옴
+  movieStore.getMovies();
+  movies.value = movieStore.movies;
+  
+  // 만약 사용자가 검색을 했다면
+  if (searchKeyword.value) {
+    
+
+    // 새로고침 오류 해결 
+    if (searchKeyword.value) {
+
+
+    // // 먼저 영화 데이터를 가져옵니다
+    // await movieStore.getMovies()
+    
+    // // 검색 결과 페이지로 이동
+    // await router.push({
+    //   name: 'SearchResults',
+    //   params: { keyword: searchKeyword.value }
+    // })
+
+    // // 검색 후 입력창 초기화
+    // searchKeyword.value = ''
+
+    // 새로고침해야하는 코드
+    router.push({
+      name: 'SearchResults',
+      params: { keyword: searchKeyword.value }
+    })
+
+
+  }
+}
+
+}
+// 나중에 하자
+// onBeforeRouteUpdate((to, from) => {
+
+//   })
+
 </script>
 
 <style scoped>

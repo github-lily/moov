@@ -3,9 +3,9 @@ from django.http import JsonResponse
 from django.conf import settings
 from django.contrib.auth import get_user_model
 import requests, json
+import os
 
-
-from .serializers import MovieDetailSerializer, MovieSerializer, CommentSerializer
+from .serializers import MovieDetailSerializer, MovieSerializer, CommentSerializer, MovieListSerializer
 from .models import Movie, Actor, Genre, Moviecomment
 from accounts.models import User
 
@@ -152,7 +152,6 @@ def getdatas():
 # getdatas()
 
 
-
 # 영화 목록 조회
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -168,7 +167,6 @@ def movie_list(request):
 @permission_classes([IsAuthenticated])
 def movie_detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
-    # if request.method == 'GET':
     serializer = MovieSerializer(movie)
     return Response(serializer.data)
 
@@ -176,14 +174,21 @@ def movie_detail(request, movie_pk):
 
 
 # 영화 댓글 생성
-@api_view(['POST'])
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def comment_create(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
-    serializer = CommentSerializer(data=request.data)
-    if serializer.is_valid(raise_exception=True):
-        serializer.save(movie=movie, user=request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    if request.method == 'GET':
+        comments = movie.comments.all()
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data)
+    
+    elif request.method == 'POST': 
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(movie=movie, user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     
 # 영화 상세정보에서 댓글 조회, 삭제, 수정
@@ -225,22 +230,62 @@ def like_movies(request, movie_pk):
 
 User = get_user_model()
 
+# 특정 영화 좋아요
+@api_view(['POST'])
+def like_movie(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    user = request.user
+    if movie.movie_like_users.filter(pk=user.pk).exists():
+        movie.movie_like_users.remove(user)
+        serializer = MovieSerializer(movie)
+        return Response(serializer.data)
+    else:
+        movie.movie_like_users.add(user)
+        serializer = MovieSerializer(movie)
+        return Response(serializer.data)
+
+
 # 좋아요 누른 모든 영화 반환
 @api_view(['GET'])
-def like_movies_list(request, username):
-    user = get_object_or_404(User, username=username)
+def like_movies_list(request, user_id):
+    user = get_object_or_404(User, id=user_id)
     movies = user.user_like_movies.all()
-    serializer = MovieSerializer(movies, many=True)
+    serializer = MovieListSerializer(movies, many=True)
     return Response(serializer.data)
 
 
 
 # 사용자가 댓글 단 영화 목록 조회
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def user_commented_movies(request, username):
+#     user = get_object_or_404(User,username=username)
+#     comments = Moviecomment.objects.filter(user=request.user).select_related('movie')
+#     movies = set(comment.movie for comment in comments)
+#     serializer = MovieSerializer(movies, many=True)
+#     return Response(serializer.data)
+
+
+# 사용자가 댓글 단 영화 목록 조회(민정 다시)
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def user_commented_movies(request, username):
-    user = get_object_or_404(User,username=username)
-    comments = Moviecomment.objects.filter(user=request.user).select_related('movie')
-    movies = set(comment.movie for comment in comments)
+    user = get_object_or_404(User, username=username)
+    # username에 해당하는 사용자가 작성한 댓글들
+    comments = Moviecomment.objects.filter(user=user)
+    # 댓글이 있는 영화들의 목록 (중복 제거)
+    movies = Movie.objects.filter(comments__in=comments).distinct()
     serializer = MovieSerializer(movies, many=True)
     return Response(serializer.data)
+
+# 민 다시다시
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def user_commented_movies(request):
+#     user = request.user
+#     # 해당 사용자가 작성한 댓글들
+#     comments = Moviecomment.objects.filter(user=user)
+#     # 댓글이 달린 영화 목록
+#     movies = Movie.objects.filter(comments__in=comments).distinct()
+#     serializer = MovieSerializer(movies, many=True)
+#     return Response(serializer.data)

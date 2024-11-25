@@ -5,13 +5,13 @@
 
     <form @submit.prevent="signUp">
       <p>사용자 이름 </p> 
-      <input class="input" type="text" id="username" v-model.trim="username" placeholder="   이름을 입력하세요.">
+      <input class="input" type="text" id="username" v-model.trim="username" placeholder="이름을 입력하세요.">
 
       <p>비밀번호 </p> 
-      <input  class="input" type="password" id="password1" v-model.trim="password1" placeholder="   비밀번호를 입력하세요.">
+      <input  class="input" type="password" id="password1" v-model.trim="password1" placeholder="비밀번호를 입력하세요.">
 
       <p>비밀번호 확인 </p> 
-      <input  class="input thirdinput" type="password" id="password2" v-model.trim="password2" placeholder="   비밀번호를 입력하세요.">
+      <input  class="input thirdinput" type="password" id="password2" v-model.trim="password2" placeholder="비밀번호를 입력하세요.">
 
       <input class="btn"  type="submit" value="SignUp">
     </form>
@@ -94,6 +94,7 @@ input {
   height: 40px;
   margin-bottom: 10px;
   border-radius: 50px;
+  padding-left: 20px;
 }
 
 .thirdinput {
