@@ -7,3 +7,4 @@ class User(AbstractUser) :
     # username = models.CharField(max_length=30, unique=True) 기본 제공 필드
     # 프로필 이미지
     profile_img = models.TextField(blank=True)
+    level = models.CharField(max_length=50)

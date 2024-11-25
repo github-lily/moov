@@ -216,13 +216,14 @@ def comment_detail(request,  movie_pk, comment_pk):
             return Response(serializer.data)
 
 
-# 영화를 좋아요 한 사람 목록
+# 영화를 좋아요 기능 구현
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def like_movies(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     if movie.movie_like_users.filter(pk=request.user.pk).exists():
         movie.movie_like_users.remove(request.user)
+        
     else:
         movie.movie_like_users.add(request.user)
     return Response(status=status.HTTP_200_OK)
@@ -230,19 +231,19 @@ def like_movies(request, movie_pk):
 
 User = get_user_model()
 
-# 특정 영화 좋아요
-@api_view(['POST'])
-def like_movie(request, movie_pk):
-    movie = get_object_or_404(Movie, pk=movie_pk)
-    user = request.user
-    if movie.movie_like_users.filter(pk=user.pk).exists():
-        movie.movie_like_users.remove(user)
-        serializer = MovieSerializer(movie)
-        return Response(serializer.data)
-    else:
-        movie.movie_like_users.add(user)
-        serializer = MovieSerializer(movie)
-        return Response(serializer.data)
+# # 특정 영화를 좋아요 기능
+# @api_view(['POST'])
+# def like_movies(request, movie_pk):
+#     movie = get_object_or_404(Movie, pk=movie_pk)
+#     user = request.user
+#     if movie.movie_like_users.filter(pk=user.pk).exists():
+#         movie.movie_like_users.remove(user)
+#         serializer = MovieSerializer(movie)
+#         return Response(serializer.data)
+#     else:
+#         movie.movie_like_users.add(user)
+#         serializer = MovieSerializer(movie)
+#         return Response(serializer.data)
 
 
 # 좋아요 누른 모든 영화 반환

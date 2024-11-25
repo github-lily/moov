@@ -13,23 +13,19 @@
         <button class="test" @click="goToTest">TEST &#9654</button>
       </div>
     </div>
-    <h3>Today's recommendation</h3>
-    <div>
-      <!-- 장르 선택 -->
-      <div>
-        <select id="genre-select" v-model="selectedGenre">
-          <option value="" selected disabled hidden>All Genre</option>
-          <option v-for="genre in genres" 
-          :key="genre.id" :value="genre.name">{{ genre.name }}</option>
-        </select>
-      </div>
 
-      <!-- 영화 12개만 출력 -->
-      <MovieList :movies="movies"/>
+    <div class="recom">
+      <h3>Today's recommendation</h3>
+        <!-- 장르 선택 -->
+          <select id="genre-select" v-model="selectedGenre" class="custom-select">
+            <option value="" selected disabled hidden class="placeholder-option">All Genre</option>
+            <option class="lists" v-for="genre in genres" 
+            :key="genre.id" :value="genre.name">{{ genre.name }}</option>
+          </select>
     </div>
-
-      <!-- 영화 목록 -->
-    <!-- <MovieList :movies="paginatedMovies" /> -->
+      
+      <!-- 필터된 영화들만 출력 -->
+      <MovieList :movies="filteredMovies"/>
 
   </div>
 </template>
@@ -42,99 +38,70 @@ import HeaderNav from '@/components/common/HeaderNav.vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { storeToRefs } from 'pinia';
+import { useUserStore } from '@/stores/user';
 
-const usestore = useAuthStore()
-const {username} = storeToRefs(usestore)
-console.log(username.value, '님의 메인페이지')
-
-
-const router = useRouter()
-const store = useMovieStore()
-const movies = ref([])
 
 const goToTest = () => {
   router.push({name:'TestView'})
 }
 
-onMounted(() => {
-  store.getMovies();
-  movies.value = store.movies;
+
+const router = useRouter()
+const store = useMovieStore()
+const authStore = useAuthStore()
+const userStore = useUserStore()
+const {username} = storeToRefs(authStore)
+
+console.log(username.value, '님의 메인페이지')
+const movies = ref([])
+const selectedGenre = ref("")
+
+const filteredMovies = computed(() => {
+  if(!selectedGenre.value) {
+    return movies.value
+  }
+  return movies.value.filter(movie => 
+  movie.genres.some(genre => genre.name === selectedGenre.value))  //장르리스트 중 하나라도 맞으면 넣겠다.
 })
-
-
-//-------------------------------------------------장르관련-----------------------------------
-
-// // 장르별 필터
-// const filteredMovies = computed(() => {
-//   if (!selectedGenre.value) {
-//     return store.movies
-//   }
-//   return store.movies.filter(movie => movie.genre.includes(selectedGenre.value))
-// })
-
-
 
 // 영화 장르 (id와 name이 매칭된 형태로 저장)
 const genres = ref([
-  { id: 28, name: "Action" },
-  { id: 12, name: "Adventure" },
-  { id: 16, name: "Animation" },
-  { id: 35, name: "Comedy" },
-  { id: 80, name: "Crime" },
-  { id: 99, name: "Documentary" },
-  { id: 18, name: "Drama" },
-  { id: 10751, name: "Family" },
-  { id: 14, name: "Fantasy" },
-  { id: 36, name: "History" },
-  { id: 27, name: "Horror" },
-  { id: 10402, name: "Music" },
-  { id: 9648, name: "Mystery" },
-  { id: 10749, name: "Romance" },
-  { id: 878, name: "Science Fiction" },
-  { id: 10770, name: "TV Movie" },
-  { id: 53, name: "Thriller" },
-  { id: 10752, name: "War" },
-  { id: 37, name: "Western" }
+  { id: 28, name: "액션" },
+  { id: 12, name: "어드벤처" },
+  { id: 16, name: "애니메이션" },
+  { id: 35, name: "코미디" },
+  { id: 80, name: "범죄" },
+  { id: 99, name: "다큐멘터리" },
+  { id: 18, name: "드라마" },
+  { id: 10751, name: "가족" },
+  { id: 14, name: "판타지" },
+  { id: 36, name: "역사" },
+  { id: 27, name: "공포" },
+  { id: 10402, name: "음악" },
+  { id: 9648, name: "미스터리" },
+  { id: 10749, name: "로맨스" },
+  { id: 878, name: "SF" },
+  { id: 10770, name: "TV 영화" },
+  { id: 53, name: "스릴러" },
+  { id: 10752, name: "전쟁" },
+  { id: 37, name: "서부" }
 ])
-const selectedGenre = ref("")
 
-// console.log('movie:', store.movies[0].genres)
 console.log('movie:', store.movies)
 
-// 장르별 필터
-// const filteredMovies = computed(() => {
-//   if (!selectedGenre.value) {
-//     return store.movies.value || [];
-//   }
+// 사용자 정보, 영화 정보 가져오기
+onMounted(async () => {
+  store.getMovies();
+  movies.value = store.movies;
   
-//   return (store.movies.value || []).filter(movie => 
-//     movie.genre && movie.genre.includes(selectedGenre.value)
-//   );
-// });
-// const filteredMovies = computed(()=> {
-//   return store.movies.filter(function(movie) {
-//     console.log('movieGenre:', movie.genres)
-//     return movie.genre === selectedGenre.value})
-// })
-
-watch(selectedGenre, () => {
-  currentPage.value = 1;
-});
-
-// // filteredMovies를 장르별로 필터링
-// const filteredMovies = computed(() => {
-//   if (!selectedGenre.value) {
-//     // store.movies가 배열인지 확인하고, 배열이 아닌 경우 빈 배열 반환
-//     return Array.isArray(store.movies) ? store.movies : [];
-//   }
-//   // 선택된 장르와 일치하는 영화만 필터링하고, 배열인지 확인
-//   const selectedGenreId = genres.value.find(genre => genre.name === selectedGenre.value)?.id;
-//   return Array.isArray(store.movies) 
-//     ? store.movies.filter(movie => movie.genres.includes(selectedGenreId))
-//     : []; // 배열이 아닌 경우 빈 배열 반환
-// });
-
-
+  if (authStore.token) {
+    userStore.getUser()
+    console.log('현재 로그인한 유저 정보:', userStore.user)
+    console.log('유저의 토큰:', authStore.token)
+  } else {
+    console.log('로그인이 필요합니다.')
+  }
+})
 
 </script>
 
@@ -218,12 +185,40 @@ body {
   color: rgb(148, 148, 148);
 }
 
+
+.recom  {
+  display: flex;
+  padding: 20px 0;}
+
+.custom-select {
+  background-color: transparent;
+  /* border-radius: 5px;
+   */
+  color: white;
+  padding: 8px;
+  font-family: 'NoTo Sans KR';
+  border: none;
+  border-bottom: 0.1px solid rgb(161, 161, 161);
+  /* text-align: center; */
+}
+
+.custom-select:focus {
+  outline: none;
+}
+
 h3 {
   font-size: 2em;
   font-family: 'Krona One';
   color: white;
-  margin-bottom: 20px;
+  margin-right: 100px;
 }
 
-
+.lists {
+  background-color: rgb(54, 54, 54); 
+  color: white;           
+  font-family: 'NoTo Sans KR';
+  font-weight: lighter;
+  /* text-align: center; */
+  /* padding: auto; */
+}
 </style>

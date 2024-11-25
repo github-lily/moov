@@ -13,7 +13,7 @@ export const useMovieStore = defineStore('movie', () => {
 
   // DRF로 전체 게시글 요청을 보내고 응답을 받아 movies에 저장하는 함수
   const getMovies = function () {
-    console.log('token',authStore.token)
+    // console.log('token',authStore.token)
 
     axios({
       method: 'get',
