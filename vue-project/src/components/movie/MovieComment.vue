@@ -65,7 +65,11 @@ const user = computed(()=> {
   return userStore.user
 }) 
 
+<<<<<<< HEAD
 console.log('comment', user.value)
+=======
+console.log('로그인한 유저 정보:', user.value)
+>>>>>>> 24029fa6bd8c673291a8382d18501212edceba80
 
 
 // 댓글 추가
